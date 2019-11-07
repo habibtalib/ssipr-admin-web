@@ -1,0 +1,236 @@
+<template>
+  <div>
+    <div class="columns">
+      <div class="column is-full">
+        <h1 class="has-text-weight-medium is-size-5">Senarai Program</h1>
+      </div>
+    </div>
+    <div class="columns">
+      <div class="column is-full">
+        <b-field grouped>
+          <b-input
+            v-model="q.name"
+            icon="certificate"
+            :placeholder="$t('f.name')"
+            expanded
+          ></b-input>
+
+          <no-ssr>
+            <b-datepicker
+              v-model="q.from_date"
+              :date-parser="dateParser"
+              icon="calendar-today"
+              placeholder="Dari"
+              expanded
+            ></b-datepicker>
+
+            <b-datepicker
+              v-model="q.to_date"
+              :date-parser="dateParser"
+              icon="calendar-today"
+              placeholder="Sehingga"
+              expanded
+            ></b-datepicker>
+          </no-ssr>
+
+          <p class="control">
+            <b-button class="button is-primary" @click="search(q)"
+              >Cari</b-button
+            >
+          </p>
+
+          <p class="control">
+            <b-button class="button is-success" @click="exportList()"
+              >Eksport</b-button
+            >
+          </p>
+        </b-field>
+      </div>
+    </div>
+    <div class="columns">
+      <div class="column is-full">
+        <table class="table is-fullwidth">
+          <thead>
+            <tr>
+              <th>Nama</th>
+              <th style="width: 15%;">Tarikh Dicipta</th>
+              <th style="width: 15%;">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="agency in programmes.list" :key="agency.id">
+              <td>
+                <a @click="openSummaryModal(agency.id)">{{ agency.name }}</a>
+              </td>
+              <td>
+                {{ agency.inserted_at }}
+              </td>
+              <td>
+                {{ humanizeUpcasingString(agency.status) }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <b-pagination
+          v-if="programmes.list"
+          :total="programmes.pagination.total_entries"
+          :current.sync="currentPage"
+          :per-page="programmes.pagination.page_size"
+          aria-next-label="Next page"
+          aria-previous-label="Previous page"
+          aria-page-label="Page"
+          aria-current-label="Current page"
+          @change="changePage"
+        ></b-pagination>
+
+        <b-modal
+          v-if="selectedProgramme"
+          :active.sync="isSummaryModalActive"
+          scroll="keep"
+        >
+          <div id="printSummary" class="card">
+            <div class="card-content">
+              <div class="content">
+                {{ selectedProgramme }}
+              </div>
+            </div>
+            <footer class="card-footer hide-p">
+              <a class="card-footer-item" @click="print">Cetak</a>
+            </footer>
+          </div>
+        </b-modal>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import { mapGetters } from 'vuex'
+
+export default {
+  middleware: ['check_admin_auth', 'admin_auth'],
+  data() {
+    return {
+      isSearchModalActive: false,
+      isSummaryModalActive: false,
+      selectedProgramme: null,
+      q: {
+        name: '',
+        from_date: new Date('2019-01-01'),
+        to_date: new Date()
+      },
+      currentPage: 1
+    }
+  },
+  computed: {
+    ...mapGetters({
+      isLoading: 'misc/isLoading',
+      currentUser: 'admin_auth/currentUser',
+      programmes: 'programme/programmes'
+    })
+  },
+  created() {
+    this.$store.dispatch('admin_auth/setCurrentUser')
+    this.$store.dispatch('programme/setList')
+    this.$store.dispatch('misc/setPathName', 'programme')
+  },
+  methods: {
+    queryParams() {
+      const params = new URLSearchParams()
+
+      params.append('page', this.currentPage)
+      params.append('name', this.q.name)
+      params.append('from_date', this.dateFormatter(this.q.from_date))
+      params.append('to_date', this.dateFormatter(this.q.to_date))
+
+      return params
+    },
+    search(query) {
+      this.$store.dispatch('programme/searchList', this.queryParams())
+    },
+    changePage(page) {
+      this.currentPage = page
+      this.$store.dispatch('programme/setList', this.queryParams())
+    },
+    openSummaryModal(id) {
+      this.setIsLoading(true)
+      this.$store.dispatch('programme/setProgramme', id).then(res => {
+        this.setIsLoading(false)
+        this.selectedProgramme = this.$store.getters['programme/programme']
+        this.isSummaryModalActive = true
+      })
+    },
+    exportList() {
+      this.$store.dispatch('programme/exportList', this.queryParams())
+    },
+    print() {
+      const prtHtml = document.getElementById('printSummary').innerHTML
+      let stylesHtml = ''
+
+      for (const node of [
+        ...document.querySelectorAll('link[rel="stylesheet"], style')
+      ]) {
+        stylesHtml += node.outerHTML
+      }
+
+      const WinPrint = window.open(
+        '',
+        '',
+        'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0'
+      )
+
+      WinPrint.document.write(
+        `<!DOCTYPE html>
+        <html>
+          <head>
+            ${stylesHtml}
+          </head>
+          <body>
+            ${prtHtml}
+          </body>
+        </html>`
+      )
+
+      WinPrint.document.close()
+      WinPrint.focus()
+      WinPrint.print()
+      WinPrint.close()
+    },
+    dateParser(d) {
+      return new Date(Date.parse(d))
+    },
+    dateFormatter(d) {
+      const year = '' + d.getFullYear()
+      let month = '' + (d.getMonth() + 1)
+      let day = '' + d.getDate()
+
+      if (month.length < 2) month = '0' + month
+      if (day.length < 2) day = '0' + day
+
+      return [year, month, day].join('-')
+    },
+    setIsLoading(status) {
+      this.$store.dispatch('misc/setIsLoading', status)
+    },
+    humanizeUpcasingString(str) {
+      return str
+        .replace(/_id$/, '')
+        .replace(/_/g, ' ')
+        .toUpperCase()
+    }
+  }
+}
+</script>
+
+<style scoped>
+.mt3rem {
+  margin-top: 3rem;
+}
+.card-content.dashb {
+  padding: 1rem;
+}
+h4.dashb {
+  margin-bottom: 0;
+}
+</style>

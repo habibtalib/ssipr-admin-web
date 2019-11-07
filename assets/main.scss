@@ -1,0 +1,33 @@
+@import "~bulma/sass/utilities/initial-variables.sass";
+$primary: #0A5D7D;
+$warning: #FCD117;
+$success: #00d1b2;
+$danger: #DA251D;
+$grey: #828282;
+$grey-light: #f2f2f2;
+$menu-item-active-background-color: #0A5D7D;
+// BULMA EXT
+@import "~bulma";
+@import "~buefy/src/scss/buefy";
+@import '~bulma-extensions/bulma-divider/dist/css/bulma-divider.sass';
+@import '~bulma-extensions/bulma-steps/dist/css/bulma-steps.sass';
+.page-enter-active,
+.page-leave-active {
+    transition: opacity .5s
+}
+
+.page-enter,
+.page-leave-active {
+    opacity: 0
+}
+
+.is-divider[data-content]::after {
+    color: #000;
+    font-size: 1rem;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
