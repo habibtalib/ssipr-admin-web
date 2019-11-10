@@ -59,7 +59,7 @@ export default {
                 const errors = []
 
                 for (const key in res.errors) {
-                  if (res.errors.hasOwnProperty(key)) {
+                  if (res.errors.hasOwnProperty.call(key)) {
                     for (const subKey in res.errors[key]) {
                       errors.push(
                         key +

@@ -92,7 +92,16 @@
             <tr>
               <th>ID Doket</th>
               <th>Pemohon</th>
-              <th>Jenis Meter</th>
+              <th
+                v-if="
+                  currentUser &&
+                    currentUser.agency &&
+                    currentUser.agency.id === 1
+                "
+              >
+                Jenis Meter
+              </th>
+              <th v-else>IPR</th>
               <th>Tarikh Permohonan</th>
               <th>Status</th>
             </tr>
@@ -101,11 +110,24 @@
             <tr v-for="application in applications.list" :key="application.id">
               <td>
                 <a @click="openSummaryModal(application.id)"
-                  >IPRSADE{{ application.id }}</a
+                  >IPR{{ application.id }}</a
                 >
               </td>
               <td>{{ application.applicant.name.toUpperCase() }}</td>
-              <td>{{ application.residence.meter_type.toUpperCase() }}</td>
+              <td
+                v-if="
+                  currentUser &&
+                    currentUser.agency &&
+                    currentUser.agency.id === 1
+                "
+              >
+                {{
+                  application.residence && application.residence.meter_type
+                    ? application.residence.meter_type.toUpperCase()
+                    : ''
+                }}
+              </td>
+              <td v-else>{{ application.ipr_code }}</td>
               <td>{{ application.inserted_at }}</td>
               <td>
                 {{ humanizeUpcasingString(application.status) }}

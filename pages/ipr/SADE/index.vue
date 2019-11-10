@@ -170,12 +170,12 @@
 </template>
 
 <script>
+import { Toast } from 'buefy/dist/components/toast'
 import PersonalFields from '~/components/ipr/SADE/personal.vue'
 import SpousesFields from '~/components/account/forms/spouses.vue'
 import ResidenceFields from '~/components/ipr/SADE/residence.vue'
 import JmbFields from '~/components/ipr/SADE/jmb.vue'
 import FormSummary from '~/components/ipr/SADE/summary.vue'
-import { Toast } from 'buefy/dist/components/toast'
 
 export default {
   middleware: ['check_admin_auth', 'admin_auth'],
@@ -301,7 +301,7 @@ export default {
             const errors = []
 
             for (const key in res.errors) {
-              if (res.errors.hasOwnProperty(key)) {
+              if (res.errors.hasOwnProperty.call(key)) {
                 for (const subKey in res.errors[key]) {
                   errors.push(
                     key +

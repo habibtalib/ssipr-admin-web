@@ -54,9 +54,9 @@
               </div>
             </div>
           </nav>
-          <span class="tag is-light" style="margin-top:5px; margin-left:2.5px;"
+          <!-- <span class="tag is-light" style="margin-top:5px; margin-left:2.5px;"
             >Skim Air Darul Ehsan</span
-          >
+          > -->
         </div>
         <div class="hero-body">
           <div class="container">
