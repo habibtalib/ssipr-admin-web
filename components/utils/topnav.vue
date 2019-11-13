@@ -21,6 +21,9 @@
               <span>{{ currentUser.email }}</span>
               <b-icon icon="menu-down"></b-icon>
             </a>
+            <b-dropdown-item aria-role="listitem" @click="setting()">
+              Profile Setting
+            </b-dropdown-item>
             <b-dropdown-item aria-role="listitem" @click="logout()">
               Logout
             </b-dropdown-item>
@@ -46,6 +49,9 @@ export default {
     logout() {
       this.$store.dispatch('admin_auth/logout')
       this.$router.push('/')
+    },
+    setting() {
+      this.$router.push('/auth/setting')
     }
   }
 }

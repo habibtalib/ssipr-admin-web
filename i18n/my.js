@@ -14,7 +14,11 @@ export default {
     add: 'Tambah'
   },
   f: {
+    id: 'ID',
+    agency: 'Agensi',
+    role: 'Peranan',
     name: 'Nama',
+    emel: 'Emel',
     ic: 'No Kad Pengenalan',
     all_id_wo_passport: 'No. Kad Pengenalan / No. Polis / No. Tentera',
     all_id: 'No. Kad Pengenalan / No. Polis / No. Tentera / No. Passport',

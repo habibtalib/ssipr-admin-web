@@ -104,6 +104,7 @@
               <th v-else>IPR</th>
               <th>Tarikh Permohonan</th>
               <th>Status</th>
+              <th>Tindakan</th>
             </tr>
           </thead>
           <tbody>
@@ -131,6 +132,11 @@
               <td>{{ application.inserted_at }}</td>
               <td>
                 {{ humanizeUpcasingString(application.status) }}
+              </td>
+              <td>
+                <span @click="viewDetail(application)">
+                  <b-icon size="is-small" icon="pencil"></b-icon
+                ></span>
               </td>
             </tr>
           </tbody>
@@ -161,6 +167,7 @@
                   :jmb-confirmation="selectedApplication.jmb_confirmation"
                   :residence="selectedApplication.residence"
                   :spouses="selectedApplication.applicant.spouses"
+                  :data="selectedApplication.data"
                   :total-spouses-salaries="
                     sumSpousesSalaries(
                       selectedApplication.applicant.spouses,
@@ -217,6 +224,9 @@ export default {
     this.$store.dispatch('misc/setPathName', 'dashboard')
   },
   methods: {
+    viewDetail(application) {
+      this.$router.push('/application/' + application.id)
+    },
     queryParams() {
       const params = new URLSearchParams()
 

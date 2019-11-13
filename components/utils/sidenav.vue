@@ -8,14 +8,7 @@
         tag="nuxt-link"
         :active="currentPath == 'dashboard'"
       ></b-menu-item>
-      <b-menu-item
-        icon="file-plus"
-        label="Permohonan"
-        to="/ipr/SADE"
-        tag="nuxt-link"
-        :active="currentPath == 'ipr'"
-      ></b-menu-item>
-      <!-- <b-menu-item icon="folder-open" :active="activeConds(['ipr'])">
+      <b-menu-item icon="folder-open" :active="activeConds(['ipr'])">
         <template slot="label" slot-scope="props">
           Permohonan
           <b-icon
@@ -25,6 +18,20 @@
           </b-icon>
         </template>
         <b-menu-item
+          icon="file-plus"
+          label="Skim Air Selangor"
+          to="/ipr/SADE"
+          tag="nuxt-link"
+          :active="currentPath == '/ipr/SADE'"
+        ></b-menu-item>
+        <b-menu-item
+          icon="file-plus"
+          label="Kasih Ibu Smart Selangor"
+          to="/ipr/KISS"
+          tag="nuxt-link"
+          :active="currentPath == '/ipr/KISS'"
+        ></b-menu-item>
+        <!-- <b-menu-item
           v-for="p in programmes.list"
           :key="p.id"
           icon="file-plus"
@@ -32,9 +39,10 @@
           to="/ipr/SADE"
           tag="nuxt-link"
           :active="activeConds(['ipr'])"
-        ></b-menu-item>
-      </b-menu-item> -->
-      <!-- <b-menu-item
+        ></b-menu-item> -->
+      </b-menu-item>
+      <b-menu-item
+        v-if="isSuperAdmin"
         icon="settings"
         :active="activeConds(['agency', 'programme', 'role'])"
       >
@@ -67,7 +75,14 @@
           tag="nuxt-link"
           :active="currentPath == 'role'"
         ></b-menu-item>
-      </b-menu-item> -->
+        <b-menu-item
+          icon="human"
+          label="Users"
+          to="/user"
+          tag="nuxt-link"
+          :active="currentPath == 'user'"
+        ></b-menu-item>
+      </b-menu-item>
     </b-menu-list>
     <!-- <b-menu-list>
       <b-menu-item label="Pengguna" icon="account" to="/expo"> </b-menu-item>
@@ -87,6 +102,10 @@ export default {
     currentPath: {
       type: String,
       required: true
+    },
+    currentUser: {
+      type: Object,
+      required: true
     }
   },
   data() {
@@ -97,7 +116,14 @@ export default {
   computed: {
     ...mapGetters({
       programmes: 'programme/programmes'
-    })
+    }),
+    isSuperAdmin() {
+      return (
+        this.currentUser &&
+        this.currentUser.role &&
+        this.currentUser.role.id === 1
+      )
+    }
   },
   created() {
     this.$store.dispatch('programme/setList')

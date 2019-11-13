@@ -58,6 +58,17 @@ export const actions = {
       // eslint-disable-next-line no-console
       .catch(err => console.log(err))
   },
+  async setApplication({ commit }, id) {
+    try {
+      const { data } = await this.$axios.get(`/api/v1/admin/applications/${id}`)
+
+      commit('setApplication', data.data)
+
+      return { error: false }
+    } catch (err) {
+      return { error: true, errors: err.response.data.errors }
+    }
+  },
   async searchList({ commit }, q) {
     await this.$axios
       .get(`/api/v1/admin/applications`, {

@@ -19,10 +19,6 @@ export default {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
-  server: {
-    port: 3001, // default: 3000
-    host: '0.0.0.0' // default: localhost
-  },
   /*
    ** Customize the progress-bar color
    */
@@ -49,6 +45,11 @@ export default {
           name: 'password',
           path: '/password',
           component: resolve(__dirname, 'pages/auth/forgot_pass.vue')
+        },
+        {
+          name: 'application-id',
+          path: '/application/:id',
+          component: resolve(__dirname, 'pages/application/index.vue')
         }
       )
     }
@@ -89,7 +90,7 @@ export default {
       }
     ]
   ],
-  devModules: ['@nuxtjs/eslint-module'],
+  buildModules: ['@nuxtjs/eslint-module'],
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options

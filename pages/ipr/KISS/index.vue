@@ -2,7 +2,7 @@
   <div class="columns">
     <div class="column">
       <h1 class="has-text-weight-semibold is-size-4">
-        Skim Air Darul Ehsan
+        Kasih Ibu Smart Selangor
       </h1>
 
       <br />
@@ -14,10 +14,10 @@
           :reset-value="resetValue"
         ></personal-fields>
 
-        <spouses-fields
-          v-if="applicant.marital_status == 'Berkahwin'"
-          :spouses="spouses"
-        ></spouses-fields>
+        <residence-fields
+          :applicant="applicant"
+          :residence="residence"
+        ></residence-fields>
 
         <article class="message is-dark">
           <div class="message-header">
@@ -27,13 +27,12 @@
             <div class="columns">
               <div class="column is-4">
                 <b-field label="Jumlah Pendapatan Pemohon">
-                  <b-input disabled :value="applicant.income"></b-input>
+                  <b-input :value="applicant.income"></b-input>
                 </b-field>
               </div>
               <div class="column is-4">
                 <b-field label="Jumlah Pendapatan Pasangan">
                   <b-input
-                    disabled
                     :value="
                       fixedTwoDecimal(sumSpousesSalaries(spouses, 'income'))
                     "
@@ -43,7 +42,6 @@
               <div class="column is-4">
                 <b-field label="Jumlah Pendapatan Isi Rumah (RM)">
                   <b-input
-                    disabled
                     :value="
                       fixedTwoDecimal(
                         parseFloat(applicant.income) +
@@ -57,16 +55,114 @@
           </div>
         </article>
 
-        <residence-fields
-          :applicant="applicant"
-          :residence="residence"
-        ></residence-fields>
+        <article class="message is-dark">
+          <div class="message-header">
+            <p>Maklumat Pendapatan Suami</p>
+          </div>
+          <div class="message-body has-background-white">
+            <div class="columns">
+              <div class="column is-4">
+                <b-field label="Jenis Pekerjaan">
+                  <b-input></b-input>
+                </b-field>
+              </div>
+              <div class="column is-4">
+                <b-field label="Nama Majikan">
+                  <b-input></b-input>
+                </b-field>
+              </div>
+              <div class="column is-4">
+                <b-field label="No Telefon Majikan">
+                  <b-input></b-input>
+                </b-field>
+              </div>
+            </div>
+            <div class="columns">
+              <div class="column is-4">
+                <b-field label="Jumlah Pendapatan">
+                  <b-input
+                    :value="
+                      fixedTwoDecimal(sumSpousesSalaries(spouses, 'income'))
+                    "
+                    disabled
+                  ></b-input>
+                </b-field>
+              </div>
+            </div>
+          </div>
+        </article>
 
-        <jmb-fields
-          v-if="residence.meter_type == 'pukal'"
-          :jmb-confirmation="jmb_confirmation"
-          :residence="residence"
-        ></jmb-fields>
+        <article class="message is-dark">
+          <div class="message-header">
+            <p>
+              MAKLUMAT ANAK-ANAK/TANGGUNGAN (berumur kurang daripada 21 tahun)
+            </p>
+          </div>
+          <div class="message-body has-background-white">
+            <div class="columns">
+              <div class="column is-full">
+                <a class="button is-primary is-pulled-right" @click="addChild()"
+                  >Tambah</a
+                >
+              </div>
+            </div>
+            <fieldset v-for="child in childrens" :key="child.idx">
+              <div class="columns">
+                <div class="column is-4">
+                  <b-field label="Nama Penuh">
+                    <b-input></b-input>
+                  </b-field>
+                </div>
+                <div class="column is-4">
+                  <b-field label="No KP/Sijil Kelahiran">
+                    <b-input></b-input>
+                  </b-field>
+                </div>
+                <div class="column is-4">
+                  <b-field label="Hubungan">
+                    <b-input></b-input>
+                  </b-field>
+                </div>
+              </div>
+              <div class="columns">
+                <div class="column is-4">
+                  <b-field label="Umur">
+                    <b-input></b-input>
+                  </b-field>
+                </div>
+                <div class="column is-4">
+                  <b-field label="Pendapatan Bulanan (RM) jika ada">
+                    <b-input></b-input>
+                  </b-field>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </article>
+
+        <article class="message is-dark">
+          <div class="message-header">
+            <p>Jumlah Pendapatan Keseluruhan Isi Rumah</p>
+          </div>
+          <div class="message-body has-background-white">
+            <fieldse>
+              <div class="columns">
+                <div class="column is-4">
+                  <b-field label="Jumlah Pendapatan (RM)">
+                    <b-input
+                      :value="
+                        fixedTwoDecimal(
+                          parseFloat(applicant.income) +
+                            sumSpousesSalaries(applicant.spouses, 'income')
+                        )
+                      "
+                    ></b-input>
+                  </b-field>
+                </div>
+              </div>
+            </fieldse>
+          </div>
+        </article>
 
         <hr />
 
@@ -171,19 +267,15 @@
 
 <script>
 import { Toast } from 'buefy/dist/components/toast'
-import PersonalFields from '~/components/ipr/SADE/personal.vue'
-import SpousesFields from '~/components/account/forms/spouses.vue'
-import ResidenceFields from '~/components/ipr/SADE/residence.vue'
-import JmbFields from '~/components/ipr/SADE/jmb.vue'
-import FormSummary from '~/components/ipr/SADE/summary.vue'
-
+import PersonalFields from '~/components/ipr/KISS/personal.vue'
+import ResidenceFields from '~/components/ipr/KISS/residence.vue'
+import FormSummary from '~/components/ipr/KISS/summary.vue'
+let idx = 1
 export default {
   middleware: ['check_admin_auth', 'admin_auth'],
   components: {
     PersonalFields,
-    SpousesFields,
     ResidenceFields,
-    JmbFields,
     FormSummary
   },
   data() {
@@ -191,6 +283,7 @@ export default {
       setuju1: null,
       setuju2: null,
       spouses: [],
+      childrens: [],
       applicant: {
         name: null,
         email: null,
@@ -229,7 +322,7 @@ export default {
   },
   created() {
     this.$store.dispatch('admin_auth/setCurrentUser')
-    this.$store.dispatch('misc/setPathName', 'ipr/SADE')
+    this.$store.dispatch('misc/setPathName', 'ipr/KISS')
   },
   methods: {
     finalize() {
@@ -333,8 +426,26 @@ export default {
       this.$store.dispatch('misc/setIsLoading', status)
     },
     sumSpousesSalaries(items, prop) {
+      if (!items) {
+        return 0
+      }
       const x = items.reduce((a, b) => parseFloat(a) + parseFloat(b[prop]), 0)
       return x
+    },
+    addChild() {
+      const newChild = {
+        idx: idx,
+        ic: null,
+        name: null,
+        income: null,
+        tele_no: null,
+        email: null
+      }
+      this.childrens.push(newChild)
+      idx++
+    },
+    removeChild(child) {
+      this.childrens.splice(this.childrens.indexOf(child), 1)
     },
     resetValue(field) {
       switch (field) {
@@ -379,6 +490,9 @@ export default {
       }
     },
     fixedTwoDecimal(n) {
+      if (!n) {
+        return 0
+      }
       return n.toFixed(2)
     },
     print() {

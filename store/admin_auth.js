@@ -116,6 +116,15 @@ export const actions = {
       // eslint-disable-next-line no-console
       .catch(err => console.log(err))
   },
+  async updateCurrentUser({ commit }) {
+    await this.$axios
+      .put('/api/v1/admin/current_admin')
+      .then(res => {
+        commit('setCurrentUser', res.data.data)
+      })
+      // eslint-disable-next-line no-console
+      .catch(err => console.log(err))
+  },
   logout({ commit }) {
     // const { data } = await this.$axios.post('/logout')
     // if (data.success) {}

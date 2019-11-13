@@ -14,7 +14,10 @@
         <div class="container">
           <div class="columns is-full">
             <div class="column is-2">
-              <side-nav :current-path="pathName"></side-nav>
+              <side-nav
+                :current-user="currentUser"
+                :current-path="pathName"
+              ></side-nav>
             </div>
             <div class="column is-10">
               <nuxt />
