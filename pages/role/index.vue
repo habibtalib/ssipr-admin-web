@@ -10,8 +10,8 @@
         <b-field grouped>
           <b-input
             v-model="q.name"
-            icon="certificate"
             :placeholder="$t('f.name')"
+            icon="certificate"
             expanded
           ></b-input>
 
@@ -34,13 +34,13 @@
           </no-ssr>
 
           <p class="control">
-            <b-button class="button is-primary" @click="search(q)"
+            <b-button @click="search(q)" class="button is-primary"
               >Cari</b-button
             >
           </p>
 
           <p class="control">
-            <b-button class="button is-info" @click="openCreateModal()">
+            <b-button @click="openCreateModal()" class="button is-info">
               Tambah Baharu
             </b-button>
           </p>
@@ -73,14 +73,14 @@
           :total="roles.pagination.total_entries"
           :current.sync="currentPage"
           :per-page="roles.pagination.page_size"
+          @change="changePage"
           aria-next-label="Next page"
           aria-previous-label="Previous page"
           aria-page-label="Page"
           aria-current-label="Current page"
-          @change="changePage"
         ></b-pagination>
 
-        <b-modal :active.sync="createModalActive" scroll="keep" :width="400">
+        <b-modal :active.sync="createModalActive" :width="400" scroll="keep">
           <create-modal></create-modal>
         </b-modal>
 

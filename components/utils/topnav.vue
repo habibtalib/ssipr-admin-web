@@ -21,10 +21,10 @@
               <span>{{ currentUser.email }}</span>
               <b-icon icon="menu-down"></b-icon>
             </a>
-            <b-dropdown-item aria-role="listitem" @click="setting()">
+            <b-dropdown-item @click="setting()" aria-role="listitem">
               Profile Setting
             </b-dropdown-item>
-            <b-dropdown-item aria-role="listitem" @click="logout()">
+            <b-dropdown-item @click="logout()" aria-role="listitem">
               Logout
             </b-dropdown-item>
           </b-dropdown>

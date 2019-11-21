@@ -6,7 +6,7 @@
     <div class="message-body has-background-white">
       <div class="columns">
         <div class="column is-full">
-          <a class="button is-primary is-pulled-right" @click="addSpouse()"
+          <a @click="addSpouse()" class="button is-primary is-pulled-right"
             >Tambah</a
           >
         </div>
@@ -120,8 +120,8 @@
                 <td class="has-text-centered">
                   <a
                     v-if="i != 0"
-                    class="button is-warning"
                     @click="removeSpouse(spouse)"
+                    class="button is-warning"
                   >
                     Padam
                   </a>

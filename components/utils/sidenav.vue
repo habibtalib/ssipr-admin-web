@@ -115,8 +115,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      programmes: 'programme/programmes',
-      currentUser: 'admin_auth/currentUser'
+      programmes: 'programme/programmes'
     }),
     isSuperAdmin() {
       return (
@@ -128,7 +127,6 @@ export default {
   },
   created() {
     this.$store.dispatch('programme/setList')
-    this.$store.dispatch('admin_auth/setCurrentUser')
   },
   methods: {
     activeConds(paths) {

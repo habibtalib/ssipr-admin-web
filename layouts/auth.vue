@@ -20,19 +20,19 @@
                 <img src="~assets/img/ssiprlogo1.png" alt="Logo" />
               </nuxt-link>
               <span
-                class="navbar-burger burger"
-                data-target="navbarMenuHeroA"
                 :class="{ 'is-active': showNav }"
                 @click="showNav = !showNav"
+                class="navbar-burger burger"
+                data-target="navbarMenuHeroA"
               >
                 <span></span>
                 <span></span>
                 <span></span>
               </span>
             </div>
-            <div class="navbar-menu" :class="{ 'is-active': showNav }">
+            <div :class="{ 'is-active': showNav }" class="navbar-menu">
               <div class="navbar-end">
-                <nuxt-link class="navbar-item" :to="authBtn[1]">
+                <nuxt-link :to="authBtn[1]" class="navbar-item">
                   {{ authBtn[0] }}
                 </nuxt-link>
                 <!-- <b-dropdown

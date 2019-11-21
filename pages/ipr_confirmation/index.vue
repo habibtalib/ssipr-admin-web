@@ -119,17 +119,17 @@
                       <b-radio
                         v-model="docket.status"
                         v-validate="'required'"
+                        @input="resetValue('applicationStatus')"
                         native-value="disemak"
                         name="applicationStatus"
-                        @input="resetValue('applicationStatus')"
                         >Terima</b-radio
                       >
                       <b-radio
                         v-model="docket.status"
                         v-validate="'required'"
+                        @input="resetValue('applicationStatus')"
                         native-value="gagal"
                         name="applicationStatus"
-                        @input="resetValue('applicationStatus')"
                         >Tolak</b-radio
                       >
                     </div>

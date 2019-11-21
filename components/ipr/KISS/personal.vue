@@ -7,9 +7,9 @@
       <div class="columns">
         <div class="column is-half">
           <b-field
-            label="IC/No. Tentera"
             :type="{ 'is-danger': errors.has('applicantId') }"
             :message="errors.first('applicantId')"
+            label="IC/No. Tentera"
             expanded
           >
             <b-input
@@ -61,8 +61,8 @@
               v-model="applicant.marital_status"
               v-validate="'required'"
               :placeholder="$t('l.choose')"
-              name="applicantMaritalStatus"
               @input="resetValue('marital_status')"
+              name="applicantMaritalStatus"
             >
               <option
                 v-for="status in maritalStatuses"

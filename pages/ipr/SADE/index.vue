@@ -27,29 +27,29 @@
             <div class="columns">
               <div class="column is-4">
                 <b-field label="Jumlah Pendapatan Pemohon">
-                  <b-input disabled :value="applicant.income"></b-input>
+                  <b-input :value="applicant.income" disabled></b-input>
                 </b-field>
               </div>
               <div class="column is-4">
                 <b-field label="Jumlah Pendapatan Pasangan">
                   <b-input
-                    disabled
                     :value="
                       fixedTwoDecimal(sumSpousesSalaries(spouses, 'income'))
                     "
+                    disabled
                   ></b-input>
                 </b-field>
               </div>
               <div class="column is-4">
                 <b-field label="Jumlah Pendapatan Isi Rumah (RM)">
                   <b-input
-                    disabled
                     :value="
                       fixedTwoDecimal(
                         parseFloat(applicant.income) +
                           sumSpousesSalaries(spouses, 'income')
                       )
                     "
+                    disabled
                   ></b-input>
                 </b-field>
               </div>
@@ -146,18 +146,18 @@
             </div>
             <footer class="card-footer hide-p">
               <a
-                class="card-footer-item"
                 @click="isSummaryModalActive = !isSummaryModalActive"
+                class="card-footer-item"
               >
                 Kemas Kini
               </a>
-              <a class="card-footer-item" @click="print">
+              <a @click="print" class="card-footer-item">
                 Cetak
               </a>
               <a
                 v-if="setuju1 && setuju2"
-                class="card-footer-item"
                 @click="create()"
+                class="card-footer-item"
               >
                 Hantar
               </a>

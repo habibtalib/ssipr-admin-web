@@ -19,7 +19,7 @@
           </b-field>
         </section>
         <footer class="modal-card-foot">
-          <button type="button" class="button" @click="$parent.close()">
+          <button @click="$parent.close()" type="button" class="button">
             Kembali
           </button>
           <button type="submit" class="button is-primary">Simpan</button>

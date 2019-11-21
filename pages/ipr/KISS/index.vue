@@ -101,7 +101,7 @@
           <div class="message-body has-background-white">
             <div class="columns">
               <div class="column is-full">
-                <a class="button is-primary is-pulled-right" @click="addChild()"
+                <a @click="addChild()" class="button is-primary is-pulled-right"
                   >Tambah</a
                 >
               </div>
@@ -242,18 +242,18 @@
             </div>
             <footer class="card-footer hide-p">
               <a
-                class="card-footer-item"
                 @click="isSummaryModalActive = !isSummaryModalActive"
+                class="card-footer-item"
               >
                 Kemas Kini
               </a>
-              <a class="card-footer-item" @click="print">
+              <a @click="print" class="card-footer-item">
                 Cetak
               </a>
               <a
                 v-if="setuju1 && setuju2"
-                class="card-footer-item"
                 @click="create()"
+                class="card-footer-item"
               >
                 Hantar
               </a>

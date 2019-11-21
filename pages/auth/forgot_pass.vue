@@ -1,13 +1,13 @@
 <template>
   <form>
-    <div class="is-divider" :data-content="$t('l.forgotPass')"></div>
+    <div :data-content="$t('l.forgotPass')" class="is-divider"></div>
 
     <b-field :label="$t('f.email')">
       <b-input v-model="email"></b-input>
     </b-field>
 
     <p class="control loginbtn">
-      <b-button type="is-primary is-fullwidth" outlined @click="submit()">
+      <b-button @click="submit()" type="is-primary is-fullwidth" outlined>
         {{ $t('l.submit') }}
       </b-button>
     </p>

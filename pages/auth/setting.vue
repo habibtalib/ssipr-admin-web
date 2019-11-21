@@ -28,9 +28,9 @@
             <div class="columns">
               <div class="column is-5">
                 <b-field
-                  label="Kata Laluan"
                   :type="{ 'is-danger': errors.has('password') }"
                   :message="errors.first('password')"
+                  label="Kata Laluan"
                 >
                   <b-input
                     v-model="password"
@@ -41,9 +41,9 @@
               </div>
               <div class="column is-5">
                 <b-field
-                  label="Sahkan Kata Laluan"
                   :type="{ 'is-danger': errors.has('confirm_password') }"
                   :message="errors.first('confirm_password')"
+                  label="Sahkan Kata Laluan"
                 >
                   <b-input
                     v-model="password_confirmation"

@@ -1,6 +1,6 @@
 <template>
   <form>
-    <div class="is-divider" :data-content="$t('l.login')"></div>
+    <div :data-content="$t('l.login')" class="is-divider"></div>
 
     <b-field :label="$t('f.ida')">
       <b-input v-model="id_admin"></b-input>
@@ -11,7 +11,7 @@
     </b-field>
 
     <p class="control loginbtn">
-      <b-button type="is-primary is-fullwidth" outlined @click="login()">
+      <b-button @click="login()" type="is-primary is-fullwidth" outlined>
         {{ $t('l.login') }}
       </b-button>
     </p>

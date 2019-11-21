@@ -10,8 +10,8 @@
         <b-field grouped>
           <b-input
             v-model="q.name"
-            icon="certificate"
             :placeholder="$t('f.name')"
+            icon="certificate"
             expanded
           ></b-input>
 
@@ -34,13 +34,13 @@
           </no-ssr>
 
           <p class="control">
-            <b-button class="button is-primary" @click="search(q)"
+            <b-button @click="search(q)" class="button is-primary"
               >Cari</b-button
             >
           </p>
 
           <p class="control">
-            <b-button class="button is-success" @click="exportList()"
+            <b-button @click="exportList()" class="button is-success"
               >Eksport</b-button
             >
           </p>
@@ -77,11 +77,11 @@
           :total="programmes.pagination.total_entries"
           :current.sync="currentPage"
           :per-page="programmes.pagination.page_size"
+          @change="changePage"
           aria-next-label="Next page"
           aria-previous-label="Previous page"
           aria-page-label="Page"
           aria-current-label="Current page"
-          @change="changePage"
         ></b-pagination>
 
         <b-modal
@@ -96,7 +96,7 @@
               </div>
             </div>
             <footer class="card-footer hide-p">
-              <a class="card-footer-item" @click="print">Cetak</a>
+              <a @click="print" class="card-footer-item">Cetak</a>
             </footer>
           </div>
         </b-modal>

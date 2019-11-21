@@ -16,13 +16,13 @@
         </div>
       </div>
       <footer class="card-footer hide-p">
-        <a class="card-footer-item" @click="$parent.close()">Kembali</a>
-        <a class="card-footer-item" @click="openEditModal">Kemas Kini</a>
+        <a @click="$parent.close()" class="card-footer-item">Kembali</a>
+        <a @click="openEditModal" class="card-footer-item">Kemas Kini</a>
         <a class="card-footer-item">Padam</a>
       </footer>
     </div>
 
-    <b-modal :active.sync="editModalActive" scroll="keep" :width="400">
+    <b-modal :active.sync="editModalActive" :width="400" scroll="keep">
       <edit-modal></edit-modal>
     </b-modal>
   </div>

@@ -15,18 +15,18 @@
               <b-radio
                 v-model="residence.meter_type"
                 v-validate="'required'"
+                @input="resetValue('meter_type')"
                 native-value="individu"
                 name="residenceMeterType"
-                @input="resetValue('meter_type')"
               >
                 Individu
               </b-radio>
               <b-radio
                 v-model="residence.meter_type"
                 v-validate="'required'"
+                @input="resetValue('meter_type')"
                 native-value="pukal"
                 name="residenceMeterType"
-                @input="resetValue('meter_type')"
               >
                 Pukal
               </b-radio>
@@ -150,8 +150,8 @@
               v-model="applicant.marital_status"
               v-validate="'required'"
               :placeholder="$t('l.choose')"
-              name="applicantMaritalStatus"
               @input="resetValue('marital_status')"
+              name="applicantMaritalStatus"
             >
               <option
                 v-for="status in maritalStatuses"
