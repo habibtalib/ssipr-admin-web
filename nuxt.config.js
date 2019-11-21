@@ -96,13 +96,13 @@ export default {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    // proxy: true
+    proxy: true
     // baseURL: process.env.API_URL
-    baseURL: process.env.API_URL || 'http://18.139.224.38/'
+    // baseURL: process.env.API_URL || 'http://18.139.224.38/'
   },
 
   proxy: {
-    // '/api/': process.env.API_URL
+    '/api/': process.env.API_URL
   },
   /*
    ** Build configuration
