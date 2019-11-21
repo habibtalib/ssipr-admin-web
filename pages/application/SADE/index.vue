@@ -170,7 +170,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import { Toast } from 'buefy/dist/components/toast'
 import PersonalFields from '~/components/ipr/SADE/personal.vue'
 import SpousesFields from '~/components/account/forms/spouses.vue'
@@ -192,23 +191,23 @@ export default {
       setuju1: null,
       setuju2: null,
       spouses: [],
-      // applicant: {
-      //   name: null,
-      //   email: null,
-      //   is_using_rep_email: false,
-      //   ic_type: 0,
-      //   ic: null,
-      //   marital_status: null,
-      //   income: 0,
-      //   phone_no: null,
-      //   address_1: null,
-      //   address_2: null,
-      //   address_3: null,
-      //   postcode: null,
-      //   district: null,
-      //   state: null,
-      //   by_admin: true
-      // },
+      applicant: {
+        name: null,
+        email: null,
+        is_using_rep_email: false,
+        ic_type: 0,
+        ic: null,
+        marital_status: null,
+        income: 0,
+        phone_no: null,
+        address_1: null,
+        address_2: null,
+        address_3: null,
+        postcode: null,
+        district: null,
+        state: null,
+        by_admin: true
+      },
       residence: {
         individual_meter_acc_no: null,
         bulk_meter_acc_no: null,
@@ -228,23 +227,8 @@ export default {
       isSummaryModalActive: false
     }
   },
-  computed: {
-    ...mapGetters({
-      currentUser: 'admin_auth/currentUser',
-      application: 'ipr_application/application'
-    }),
-    applicant() {
-      return this.application && this.application.applicant
-        ? this.application.applicant
-        : {}
-    }
-  },
   created() {
     this.$store.dispatch('admin_auth/setCurrentUser')
-    this.$store.dispatch(
-      'ipr_application/setApplication',
-      this.$route.params.id
-    )
     this.$store.dispatch('misc/setPathName', 'ipr/SADE')
   },
   methods: {

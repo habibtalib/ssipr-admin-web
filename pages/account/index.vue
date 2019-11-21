@@ -225,7 +225,8 @@ export default {
   },
   methods: {
     viewDetail(application) {
-      this.$router.push('/application/' + application.id)
+      // this.$router.push('/application/' + application.id)
+      this.$router.push('/ipr/SADE/' + application.id)
     },
     queryParams() {
       const params = new URLSearchParams()
