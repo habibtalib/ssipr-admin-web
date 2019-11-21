@@ -1,0 +1,307 @@
+ 1  ls
+    2  sudo apt-get update
+    3  sudo apt-get install nodejs npm
+    4  curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+    5  echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+    6  sudo apt-get update && sudo apt-get install yarn
+    7  npm
+    8  clear
+    9  cd ~
+   10  ls
+   11  cd
+   12  mkdir apps
+   13  ls
+   14  cd apps/
+   15  mkdir ipr_web
+   16  mkdir ipr_admin
+   17  clear
+   18  cd
+   19  sudo npm install pm2 -g
+   20  clear
+   21  exit
+   22  sudo apt-get install nginx
+   23  sudo nano /etc/nginx/sites-available/ssipr-admin.selangor.gov.my
+   24  clear
+   25  sudo rm /etc/nginx/sites-enabled/default
+   26  sudo ln -sf /etc/nginx/sites-available/ssipr-admin.selangor.gov.my /etc/nginx/sites-enabled/ssipr-admin.selangor.gov.my
+   27  sudo nano /etc/nginx/sites-available/ssipr-daftar.selangor.gov.my
+   28  clear
+   29  sudo ln -sf /etc/nginx/sites-available/ssipr-daftar.selangor.gov.my /etc/nginx/sites-enabled/ssipr-daftar.selangor.gov.my
+   30  cd /etc/nginx/
+   31  cd sites-enabled/
+   32  ls
+   33  cat ssipr-
+   34  cat ssipr-daftar.selangor.gov.my
+   35  cat ssipr-admin.selangor.gov.my
+   36  clear
+   37  cd
+   38  sudo nginx -t
+   39  sudo systemctl restart nginx
+   40  pm2
+   41  clear
+   42  exit
+   43  clear
+   44  ls
+   45  cd apps/
+   46  ls
+   47  cd ipr_
+   48  cd ipr_admin/
+   49  git status
+   50  exit
+   51  apt-get install git
+   52  sudo apt-get install git
+   53  cd ~/.ssh/
+   54  ls
+   55  pws
+   56  pwd
+   57  cd
+   58  ssh-keygen -t rsa -C "ssipr@selangor.gov.my"
+   59  clear
+   60  cat ~/.ssh/id_rsa.pub
+   61  clear
+   62  cd ~/.ssh/
+   63  ls
+   64  cd
+   65  sudo chown -R $(whoami) .config
+   66  ~/.ssh/config
+   67  cd
+   68  ls -al
+   69  cd apps/
+   70  ls
+   71  cd
+   72  git clone git@bitbucket.org:mirulzuan67/ipr_admin.git
+   73  cd .ssh/
+   74  ls
+   75  cd
+   76  sudo systemctl restart nginx
+   77  pm2 status
+   78  pm2 log
+   79  clear
+   80  pm2 status
+   81  cd /etc/nginx/sites-available/
+   82  ls
+   83  sudo nano ssipr-admin.selangor.gov.my
+   84  sudo systemctl restart nginx
+   85  cd
+   86  pm2 status
+   87  pm2 log
+   88  clear
+   89  ls
+   90  cd apps/
+   91  ls
+   92  cd ipr_admin/
+   93  ls
+   94  cd current
+   95  ls
+   96  exit
+   97  cd apps/ipr_admin/
+   98  yarn run dev
+   99  sudo yarn run dev
+  100  cd current
+  101  sudo yarn run dev
+  102  clear
+  103  cd
+  104  sudo systemctl status nginx
+  105  clear
+  106  sudo nano /etc/nginx/sites-available/ssipr-admin.selangor.gov.my
+  107  history
+  108  sudo ln -sf /etc/nginx/sites-available/ssipr-admin.selangor.gov.my /etc/nginx/sites-enabled/ssipr-admin.selangor.gov.my
+  109  sudo systemctl restart nginx
+  110  clear
+  111  pm2 log
+  112  sudo systemctl start nginx
+  113  sudo systemctl restart nginx
+  114  cd /etc/nginx/
+  115  ls
+  116  cd
+  117  cd /tmp/log
+  118  cd /var/log/nginx/
+  119  ls
+  120  cat error.log
+  121  sudo cat error.log
+  122  sudo cat access.log
+  123  cd
+  124  clear
+  125  pm2 log
+  126  clear
+  127  cd /etc/nginx/
+  128  cd sites-available/
+  129  cat ssipr-admin.selangor.gov.my
+  130  cat ssipr-daftar.selangor.gov.my
+  131  cd
+  132  ps aux | grep nginx
+  133  netstat -tulpn | grep :80
+  134  netstat -tulpn | grep :3000
+  135  netstat -tulpn | grep :80
+  136  sudo nginx -t
+  137  clear
+  138  sudo ufw status
+  139  sudo ufw enable
+  140  sudo ufw status verbose
+  141  sudo ufw status verbosesudo ufw enable
+  142  sudo ufw enable
+  143  sudo ufw status verbose
+  144  sudo ufw allow ssh
+  145  sudo ufw allow http
+  146  ufw status
+  147  sudo ufw status
+  148  sudo ufw allow 'Nginx HTTP'
+  149  sudo ufw status
+  150  clear
+  151  sudo ufw status verbose
+  152  sudo systemctl restart nginx
+  153  pm2 log
+  154  sudo ufw status verbose
+  155  sudo ufw allow ssh
+  156  sudo ufw status verbose
+  157  sudo ufw status
+  158  cd ..
+  159  cd
+  160  cd apps/
+  161  ls
+  162  sudo rm -rf ipr_web/
+  163  mkdir ipr_web
+  164  cd ipr_web/
+  165  ls
+  166  sudo systemctl status nginx
+  167  sudo ufw allow https
+  168  sudo ufw status
+  169  sudo ufw allow 'Nginx HTTPS'
+  170  sudo ufw status
+  171  sudo ufw allow https
+  172  clear
+  173  history
+  174  clear
+  175  exit
+  176  clear
+  177  ls
+  178  cd /etc/nginx/sites-available/
+  179  ls
+  180  clear
+  181  ls
+  182  sudo nano ssipr-admin.selangor.gov.my
+  183  sudo nano ssipr-daftar.selangor.gov.my
+  184  clear
+  185  history
+  186  sudo ln -sf /etc/nginx/sites-available/ssipr-admin.selangor.gov.my /etc/nginx/sites-enabled/ssipr-admin.selangor.gov.my
+  187  cd ..
+  188  cd
+  189  sudo ln -sf /etc/nginx/sites-available/ssipr-daftar.selangor.gov.my /etc/nginx/sites-enabled/ssipr-daftar.selangor.gov.my
+  190  sudo systemctl restart nginx
+  191  exit
+  192  pm2 log
+  193  ping http://ssipr-daftar.selangor.gov.my/
+  194  exit
+  195  clear
+  196  history
+  197  cd apps
+  198  ls
+  199  cd ipr_admin/
+  200  ls
+  201  cd current
+  202  ls
+  203  cat .env
+  204  sudo nano .env
+  205  cd ..
+  206  cd current
+  207  cat .env
+  208  ls
+  209  cd ..
+  210  cd ipr_web/
+  211  cd current
+  212  sudo nano .env
+  213  clear
+  214  exit
+  215  cd apps/ipr_web/
+  216  ls
+  217  cd shared/
+  218  ls
+  219  cd ..
+  220  cd current
+  221  ls
+  222  sudo nano.env
+  223  sudo nano .env
+  224  exit
+  225  cd apps/
+  226  ls
+  227  cd ipr_web/
+  228  ls
+  229  git remote -v
+  230  git remote
+  231  ls
+  232  cd current
+  233  git remote
+  234  git remote -v
+  235  git remote set-url git@github.com:smarttechtank/ssipr-rakyat-web.git
+  236  git remote set-url origin git@github.com:smarttechtank/ssipr-rakyat-web.git
+  237  git remote -v
+  238  cd ..
+  239  cd ipr_admin/
+  240  cd current
+  241  git remote -v
+  242  git remote -v set-url git@github.com:smarttechtank/ssipr-admin-web.git
+  243  git remote -v set-url origin git@github.com:smarttechtank/ssipr-admin-web.git
+  244  git remote -v
+  245  clear
+  246  cd
+  247  cd .ssh/
+  248  ls
+  249  cat id_rsa.pub
+  250  exit
+  251  cd apps/
+  252  cd ipr_web/current
+  253  ls
+  254  git pull origin master
+  255  clear
+  256  cd ..
+  257  cd ipr_asd
+  258  cd ipr_admin/current
+  259  git pull origin master
+  260  clear
+  261  exit
+  262  ls
+  263  cd apps/ipr_admin/current
+  264  ls
+  265  sudo nano .env
+  266  exit
+  267  cd apps/ipr_web/current
+  268  ls
+  269  cat .env
+  270  git status
+  271  cd apps/ipr_web/current
+  272  sudo nano .env
+  273  exit
+  274  ls
+  275  cd apps/
+  276  ls
+  277  cd ipr_
+  278  cd ipr_web/
+  279  ls
+  280  cd current
+  281  cat .env
+  282  exit
+  283  ls
+  284  cd apps/ipr_admin/
+  285  ls
+  286  cd current
+  287  ls
+  288  sudo nano .env
+  289  exit
+  290  ls
+  291  ls -al
+  292  chown -R deploy:deploy .config
+  293  sudo chown -R deploy:deploy .config
+  294  ls -al
+  295  pwd
+  296  cd .config/
+  297  ls
+  298  cd configstore/
+  299  ls
+  300  cat nodemon.json
+  301  exit
+  302  clear
+  303  ls
+  304  cd .ssh/
+  305  ls
+  306  cat authorized_keys
+  307  cat known_hosts

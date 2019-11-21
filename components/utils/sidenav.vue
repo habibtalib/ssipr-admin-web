@@ -2,34 +2,34 @@
   <b-menu>
     <b-menu-list label="Menu">
       <b-menu-item
+        :active="currentPath == 'dashboard'"
         icon="home"
         label="Dashboard"
         to="/account"
         tag="nuxt-link"
-        :active="currentPath == 'dashboard'"
       ></b-menu-item>
-      <b-menu-item icon="folder-open" :active="activeConds(['ipr'])">
+      <b-menu-item :active="activeConds(['ipr'])" icon="folder-open">
         <template slot="label" slot-scope="props">
           Permohonan
           <b-icon
-            class="is-pulled-right"
             :icon="props.expanded ? 'menu-down' : 'menu-up'"
+            class="is-pulled-right"
           >
           </b-icon>
         </template>
         <b-menu-item
+          :active="currentPath == '/ipr/SADE'"
           icon="file-plus"
           label="Skim Air Selangor"
           to="/ipr/SADE"
           tag="nuxt-link"
-          :active="currentPath == '/ipr/SADE'"
         ></b-menu-item>
         <b-menu-item
+          :active="currentPath == '/ipr/KISS'"
           icon="file-plus"
           label="Kasih Ibu Smart Selangor"
           to="/ipr/KISS"
           tag="nuxt-link"
-          :active="currentPath == '/ipr/KISS'"
         ></b-menu-item>
         <!-- <b-menu-item
           v-for="p in programmes.list"
@@ -43,44 +43,44 @@
       </b-menu-item>
       <b-menu-item
         v-if="isSuperAdmin"
-        icon="settings"
         :active="activeConds(['agency', 'programme', 'role'])"
+        icon="settings"
       >
         <template slot="label" slot-scope="props">
           Utiliti
           <b-icon
-            class="is-pulled-right"
             :icon="props.expanded ? 'menu-down' : 'menu-up'"
+            class="is-pulled-right"
           >
           </b-icon>
         </template>
         <b-menu-item
+          :active="currentPath == 'agency'"
           icon="home"
           label="Agensi"
           to="/agency"
           tag="nuxt-link"
-          :active="currentPath == 'agency'"
         ></b-menu-item>
         <b-menu-item
+          :active="currentPath == 'programme'"
           icon="certificate"
           label="Program"
           to="/programme"
           tag="nuxt-link"
-          :active="currentPath == 'programme'"
         ></b-menu-item>
         <b-menu-item
+          :active="currentPath == 'role'"
           icon="lock"
           label="Peranan"
           to="/role"
           tag="nuxt-link"
-          :active="currentPath == 'role'"
         ></b-menu-item>
         <b-menu-item
+          :active="currentPath == 'user'"
           icon="human"
           label="Users"
           to="/user"
           tag="nuxt-link"
-          :active="currentPath == 'user'"
         ></b-menu-item>
       </b-menu-item>
     </b-menu-list>
@@ -115,7 +115,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      programmes: 'programme/programmes'
+      programmes: 'programme/programmes',
+      currentUser: 'admin_auth/currentUser'
     }),
     isSuperAdmin() {
       return (
@@ -127,6 +128,7 @@ export default {
   },
   created() {
     this.$store.dispatch('programme/setList')
+    this.$store.dispatch('admin_auth/setCurrentUser')
   },
   methods: {
     activeConds(paths) {

@@ -18,7 +18,7 @@ module.exports = {
       user: 'ubuntu',
       host: '18.139.22.150',
       ref: 'origin/master',
-      repo: 'git@github.com:smarttechtank/ssipr-admin-web.git',
+      repo: 'git@github.com:habibtalib/ssipr-admin-web.git',
       path: '/home/ubuntu/apps/ipr_admin',
       ssh_options: 'ForwardAgent=yes',
       env: {
@@ -31,7 +31,7 @@ module.exports = {
       user: 'deploy',
       host: '13.251.234.31',
       ref: 'origin/master',
-      repo: 'git@github.com:smarttechtank/ssipr-admin-web.git',
+      repo: 'git@github.com:habibtalib/ssipr-admin-web.git',
       path: '/home/deploy/apps/ipr_admin',
       ssh_options: 'ForwardAgent=yes',
       'post-deploy':
