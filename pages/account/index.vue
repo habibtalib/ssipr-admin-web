@@ -168,6 +168,7 @@
                   :residence="selectedApplication.residence"
                   :spouses="selectedApplication.applicant.spouses"
                   :data="selectedApplication.data"
+                  :all="selectedApplication"
                   :total-spouses-salaries="
                     sumSpousesSalaries(
                       selectedApplication.applicant.spouses,
