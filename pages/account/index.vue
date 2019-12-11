@@ -108,7 +108,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="application in applications.list" :key="application.id">
+            <tr v-for="application in applicationList" :key="application.id">
               <td>
                 <a @click="openSummaryModal(application.id)"
                   >IPR{{ application.id }}</a
@@ -217,7 +217,12 @@ export default {
     ...mapGetters({
       currentUser: 'admin_auth/currentUser',
       applications: 'ipr_application/applications'
-    })
+    }),
+    applicationList() {
+      return this.applications.list.filter(item => {
+        return item.ipr_code === 'AIR_SELANGOR'
+      })
+    }
   },
   created() {
     this.$store.dispatch('admin_auth/setCurrentUser')
