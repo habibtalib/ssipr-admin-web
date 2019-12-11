@@ -108,7 +108,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="application in applicationList" :key="application.id">
+            <tr v-for="application in applications.list" :key="application.id">
               <td>
                 <a @click="openSummaryModal(application.id)"
                   >IPR{{ application.id }}</a
@@ -226,7 +226,7 @@ export default {
   },
   created() {
     this.$store.dispatch('admin_auth/setCurrentUser')
-    this.$store.dispatch('ipr_application/setList')
+    this.$store.dispatch('ipr_application/setList', this.queryParams())
     this.$store.dispatch('misc/setPathName', 'dashboard')
   },
   methods: {
@@ -239,6 +239,7 @@ export default {
 
       params.append('page', this.currentPage)
       params.append('ic', this.q.ic)
+      params.append('ipr_code', 'AIR_SELANGOR')
       params.append('from_date', this.dateFormatter(this.q.from_date))
       params.append('to_date', this.dateFormatter(this.q.to_date))
 
