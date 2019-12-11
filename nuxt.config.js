@@ -20,7 +20,7 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
   server: {
-    port: 3001, // default: 3000
+    port: process.env.PORT || 3001, // default: 3000
     host: '0.0.0.0' // default: localhost
   },
   /*
@@ -100,13 +100,13 @@ export default {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    proxy: true
+    // proxy: true
     // baseURL: process.env.API_URL
-    // baseURL: process.env.API_URL || 'http://18.139.224.38/'
+    baseURL: process.env.API_URL || 'http://18.139.224.38/'
   },
 
   proxy: {
-    '/api/': process.env.API_URL
+    // '/api/': process.env.API_URL
   },
   /*
    ** Build configuration
