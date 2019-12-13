@@ -6,7 +6,7 @@
           <h1 class="has-text-weight-semibold is-size-4">
             {{ role.name }}
             <span class="has-text-danger has-text-weight-light is-size-6">
-              {{ role.inserted_at }}
+              {{ role.inserted_at | formatDate }}
             </span>
           </h1>
 
@@ -29,12 +29,20 @@
 </template>
 
 <script>
+import moment from 'moment'
 import { mapGetters } from 'vuex'
 import editModal from '~/components/role/edit_modal.vue'
 
 export default {
   components: {
     editModal
+  },
+  filters: {
+    formatDate(value) {
+      if (value) {
+        return moment(String(value)).format('DD/MM/YYYY')
+      }
+    }
   },
   data() {
     return {

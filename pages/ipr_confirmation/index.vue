@@ -44,7 +44,7 @@
                             .join(', ')
                         }}
                       </td>
-                      <td>{{ application.inserted_at }}</td>
+                      <td>{{ application.inserted_at | formatDate }}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -225,11 +225,19 @@
 </template>
 
 <script>
+import moment from 'moment'
 import { mapGetters } from 'vuex'
 import { Toast } from 'buefy'
 
 export default {
   layout: 'unverified',
+  filters: {
+    formatDate(value) {
+      if (value) {
+        return moment(String(value)).format('DD/MM/YYYY')
+      }
+    }
+  },
   data() {
     return {
       docket: {

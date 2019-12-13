@@ -129,7 +129,7 @@
                 }}
               </td>
               <td v-else>{{ application.ipr_code }}</td>
-              <td>{{ application.inserted_at }}</td>
+              <td>{{ application.inserted_at | formatDate }}</td>
               <td>
                 {{ humanizeUpcasingString(application.status) }}
               </td>
@@ -192,6 +192,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 import { mapGetters } from 'vuex'
 import FormSummary from '~/components/ipr/SADE/summary.vue'
 
@@ -199,6 +200,13 @@ export default {
   middleware: ['check_admin_auth', 'admin_auth'],
   components: {
     FormSummary
+  },
+  filters: {
+    formatDate(value) {
+      if (value) {
+        return moment(String(value)).format('DD/MM/YYYY')
+      }
+    }
   },
   data() {
     return {

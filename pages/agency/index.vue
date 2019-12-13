@@ -63,7 +63,7 @@
                 <a @click="openSummaryModal(agency.id)">{{ agency.name }}</a>
               </td>
               <td>
-                {{ agency.inserted_at }}
+                {{ agency.inserted_at | formatDate }}
               </td>
               <td>
                 {{ humanizeUpcasingString(agency.status) }}
@@ -106,10 +106,18 @@
 </template>
 
 <script>
+import moment from 'moment'
 import { mapGetters } from 'vuex'
 
 export default {
   middleware: ['check_admin_auth', 'admin_auth'],
+  filters: {
+    formatDate(value) {
+      if (value) {
+        return moment(String(value)).format('DD/MM/YYYY')
+      }
+    }
+  },
   data() {
     return {
       isSearchModalActive: false,
