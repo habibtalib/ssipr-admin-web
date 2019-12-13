@@ -8,7 +8,9 @@
       </div>
       <div class="columns">
         <div class="column is-half">
-          <h4 class="title is-6">Tarik Permohonan : {{ all.inserted_at }}</h4>
+          <h4 class="title is-6">
+            Tarik Permohonan : {{ all.inserted_at | formatDate }}
+          </h4>
         </div>
       </div>
 
@@ -239,7 +241,15 @@
 </template>
 
 <script>
+import moment from 'moment'
 export default {
+  filters: {
+    formatDate(value) {
+      if (value) {
+        return moment(String(value)).format('DD/MM/YYYY')
+      }
+    }
+  },
   props: {
     all: {
       type: Object,
