@@ -297,7 +297,11 @@ export default {
               meter_type: this.residence.meter_type,
               individual_meter_acc_no: this.residence.individual_meter_acc_no,
               bulk_meter_acc_no: this.residence.bulk_meter_acc_no,
-              ownership_status: this.residence.ownership_status
+              ownership_status: this.residence.ownership_status,
+              other_home_type: this.residence.other_home_type,
+              home_type: this.residence.home_type,
+              damage_type: this.residence.damage_type,
+              id: this.residence.id
             },
             jmb_confirmation:
               this.residence.meter_type === 'pukal'

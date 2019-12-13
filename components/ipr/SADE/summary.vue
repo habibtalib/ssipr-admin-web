@@ -2,8 +2,11 @@
   <div class="columns">
     <div class="column is-full">
       <div class="columns">
-        <div class="column is-full">
+        <div class="column is-half">
           <h1 class="title is-5">Rumusan Permohonan</h1>
+        </div>
+        <div class="column is-half">
+          <h4 class="title is-6">Tarik Permohonan : {{ all.inserted_at }}</h4>
         </div>
       </div>
 
@@ -236,6 +239,10 @@
 <script>
 export default {
   props: {
+    all: {
+      type: Object,
+      required: true
+    },
     applicant: {
       type: Object,
       required: true
