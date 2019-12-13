@@ -5,6 +5,8 @@
         <div class="column is-half">
           <h1 class="title is-5">Rumusan Permohonan</h1>
         </div>
+      </div>
+      <div class="columns">
         <div class="column is-half">
           <h4 class="title is-6">Tarik Permohonan : {{ all.inserted_at }}</h4>
         </div>
@@ -124,7 +126,7 @@
               </b-field>
 
               <b-field label="Jumlah Pendapatan Isi Rumah (RM)">
-                {{ totalSalaries }}
+                {{ total }}
               </b-field>
             </div>
           </div>
@@ -276,6 +278,14 @@ export default {
     data: {
       type: Object,
       required: true
+    }
+  },
+  computed: {
+    total() {
+      return (
+        parseFloat(this.totalSpousesSalaries) +
+        parseFloat(this.applicant.income)
+      )
     }
   }
 }
