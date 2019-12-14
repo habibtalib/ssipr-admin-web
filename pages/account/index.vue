@@ -204,7 +204,9 @@ export default {
   filters: {
     formatDate(value) {
       if (value) {
-        return moment(String(value)).format('DD/MM/YYYY')
+        return moment(String(value), 'DD-MM-YYYY').isValid()
+          ? moment(String(value), 'DD-MM-YYYY').format('DD/MM/YYYY')
+          : value
       }
     }
   },
