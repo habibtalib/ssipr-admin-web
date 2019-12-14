@@ -27,7 +27,11 @@
             <div class="columns">
               <div class="column is-4">
                 <b-field label="Jumlah Pendapatan Pemohon">
-                  <b-input :value="applicant.income" disabled></b-input>
+                  <b-input
+                    :value="applicant.income"
+                    type="number"
+                    disabled
+                  ></b-input>
                 </b-field>
               </div>
               <div class="column is-4">
@@ -36,6 +40,7 @@
                     :value="
                       fixedTwoDecimal(sumSpousesSalaries(spouses, 'income'))
                     "
+                    type="number"
                     disabled
                   ></b-input>
                 </b-field>
@@ -49,6 +54,7 @@
                           sumSpousesSalaries(spouses, 'income')
                       )
                     "
+                    type="number"
                     disabled
                   ></b-input>
                 </b-field>
