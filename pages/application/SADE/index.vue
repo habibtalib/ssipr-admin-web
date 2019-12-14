@@ -86,6 +86,7 @@
                   :jmb-confirmation="jmb_confirmation"
                   :residence="residence"
                   :spouses="spouses"
+                  :all="applicant"
                   :total-spouses-salaries="
                     fixedTwoDecimal(sumSpousesSalaries(spouses, 'income'))
                   "

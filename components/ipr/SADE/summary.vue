@@ -9,7 +9,7 @@
       <div class="columns">
         <div class="column is-half">
           <h4 class="title is-6">
-            Tarik Permohonan : {{ all.inserted_at | formatDate }}
+            Tarik Permohonan : {{ applicationDate | formatDate }}
           </h4>
         </div>
       </div>
@@ -275,21 +275,13 @@ export default {
       required: true
     },
     totalSpousesSalaries: {
-      type: Number,
-      required: true
-    },
-    totalSalaries: {
-      type: Number,
+      type: [String, Number],
       required: true
     },
     applicationStatus: {
       type: String,
       required: false,
       default: null
-    },
-    data: {
-      type: Object,
-      required: true
     }
   },
   computed: {
@@ -298,6 +290,9 @@ export default {
         parseFloat(this.totalSpousesSalaries) +
         parseFloat(this.applicant.income)
       )
+    },
+    applicationDate() {
+      return this.all.inserted_at || moment(Date.now()).format('DD/MM/YYYY')
     }
   }
 }
