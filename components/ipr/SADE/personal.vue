@@ -34,16 +34,7 @@
           </b-field>
 
           <b-field grouped>
-            <b-field
-              :label="
-                applicant.ic_type == 0
-                  ? $t('f.ic')
-                  : applicant.ic_type == 1
-                  ? $t('f.myPolisNo')
-                  : $t('f.myTenteraNo')
-              "
-              expanded
-            >
+            <b-field label="No. Identiti" expanded>
               <b-field>
                 <b-select
                   v-model="applicant.ic_type"
