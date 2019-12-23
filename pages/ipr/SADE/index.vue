@@ -179,6 +179,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { Toast } from 'buefy/dist/components/toast'
+import axios from 'axios'
 import PersonalFields from '~/components/ipr/SADE/personal.vue'
 import SpousesFields from '~/components/account/forms/spouses.vue'
 import ResidenceFields from '~/components/ipr/SADE/residence.vue'
@@ -343,6 +344,9 @@ export default {
               type: 'is-danger'
             })
           } else {
+            axios.get(
+              `http://mtsms.15888.my/Receiver.aspx?keyword=SUKSSSIPR&Username=suksssipr&Password=suks$$s1pr19&Type=bulk&contents=Profil+AIR+SELANGOR+anda+berjaya+didaftarkan&mobileno=${this.applicant.phone_no}&guid=0`
+            )
             Toast.open({
               duration: 5000,
               message: `Permohonan berjaya dihantar.`,

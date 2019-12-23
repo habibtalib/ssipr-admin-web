@@ -292,7 +292,9 @@ export default {
       )
     },
     applicationDate() {
-      return this.all.inserted_at || moment(Date.now()).format('DD/MM/YYYY')
+      return (
+        this.applicant.inserted_at || moment(Date.now()).format('DD/MM/YYYY')
+      )
     }
   }
 }

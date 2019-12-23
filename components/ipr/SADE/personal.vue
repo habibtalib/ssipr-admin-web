@@ -92,7 +92,7 @@
                 >
                   <b-input
                     v-model="applicant.email"
-                    v-validate="'required|email'"
+                    v-validate="'email'"
                     name="applicantEmail"
                   ></b-input>
                 </b-field>
@@ -179,7 +179,7 @@
               v-model="applicant.phone_no"
               v-validate="'required|numeric'"
               name="applicantPNo"
-              placeholder="0123456789"
+              placeholder="60123456789"
             ></b-input>
           </b-field>
         </div>
