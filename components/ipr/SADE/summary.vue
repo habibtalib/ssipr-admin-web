@@ -9,7 +9,7 @@
       <div class="columns">
         <div class="column is-half">
           <h4 class="title is-6">
-            Tarik Permohonan : {{ applicationDate | formatDate }}
+            Tarikh Permohonan : {{ applicationDate | formatDate }}
           </h4>
         </div>
       </div>

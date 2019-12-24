@@ -288,7 +288,7 @@ export default {
               ic: this.applicant.ic.toUpperCase(),
               marital_status: this.applicant.marital_status,
               income: this.applicant.income,
-              phone_no: this.applicant.phone_no,
+              phone_no: this.applicant.telco + this.applicant.phone_no,
               address_1: this.applicant.address_1,
               address_2: this.applicant.address_2,
               address_3: this.applicant.address_3,
@@ -340,12 +340,14 @@ export default {
 
             Toast.open({
               duration: 5000,
-              message: errors.join(', '),
+              message: errors,
               type: 'is-danger'
             })
           } else {
+            console.log(res.data)
+            const message = `[PRSADE${res.data.id}] PERMOHONAN SKIM AIR DARUL EHSAN - ${this.applicant.name} telah diterima dan sedang diproses`
             axios.get(
-              `http://mtsms.15888.my/Receiver.aspx?keyword=SUKSSSIPR&Username=suksssipr&Password=suks$$s1pr19&Type=bulk&contents=Profil+AIR+SELANGOR+anda+berjaya+didaftarkan&mobileno=${this.applicant.phone_no}&guid=0`
+              `http://mtsms.15888.my/Receiver.aspx?keyword=SUKSSSIPR&Username=suksssipr&Password=suks$$s1pr19&Type=bulk&contents=${message}&mobileno=${this.applicant.phone_no}&guid=0`
             )
             Toast.open({
               duration: 5000,

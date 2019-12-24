@@ -175,11 +175,16 @@
             :type="{ 'is-danger': errors.has('applicantPNo') }"
             :message="errors.first('applicantPNo')"
           >
+            <b-select v-model="applicant.telco" placeholder="Select No.">
+              <option v-for="telco in telcos" :value="telco" :key="telco">
+                {{ telco }}
+              </option>
+            </b-select>
             <b-input
               v-model="applicant.phone_no"
-              v-validate="'required|numeric'"
+              v-validate="'numeric'"
               name="applicantPNo"
-              placeholder="60123456789"
+              placeholder="23456789"
             ></b-input>
           </b-field>
         </div>
@@ -207,6 +212,22 @@ export default {
     resetValue: {
       type: Function,
       required: true
+    }
+  },
+  data() {
+    return {
+      telcos: [
+        '6010',
+        '6011',
+        '6012',
+        '6013',
+        '6014',
+        '6015',
+        '6016',
+        '6017',
+        '6018',
+        '6019'
+      ]
     }
   },
   computed: {

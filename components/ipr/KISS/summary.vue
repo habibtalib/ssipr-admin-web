@@ -7,7 +7,7 @@
         </div>
         <div class="column is-half">
           <h4 class="title is-6">
-            Tarik Permohonan : {{ all.inserted_at | formatDate }}
+            Tarikh Permohonan : {{ all.inserted_at | formatDate }}
           </h4>
         </div>
       </div>

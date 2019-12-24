@@ -27,7 +27,7 @@ export const actions = {
 
       commit('setApplication', data.data)
 
-      return { error: false }
+      return { error: false, data: data.data }
     } catch (err) {
       return { error: true, errors: err.response.data.errors }
     }
