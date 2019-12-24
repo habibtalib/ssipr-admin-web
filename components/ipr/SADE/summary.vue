@@ -55,7 +55,7 @@
               </b-field>
 
               <b-field :label="$t('f.pNo')">
-                {{ applicant.phone_no }}
+                {{ applicant.telco || '' }}{{ applicant.phone_no }}
               </b-field>
             </div>
           </div>
