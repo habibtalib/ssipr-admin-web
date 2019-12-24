@@ -346,7 +346,7 @@ export default {
             })
           } else {
             console.log(res.data, this.applicant)
-            const message = `[PRSADE${res.data.id}]PERMOHONAN SKIM AIR DARUL EHSAN-${this.applicant.name} telah diterima dan sedang diproses`
+            const message = `[IPRSADE${res.data.id}]PERMOHONAN SKIM AIR DARUL EHSAN-[${this.applicant.ic}] telah diterima dan sedang diproses`
             axios.get(
               `http://mtsms.15888.my/Receiver.aspx?keyword=SUKSSSIPR&Username=suksssipr&Password=suks$$s1pr19&Type=bulk&contents=${message}&mobileno=${this.applicant.telco}${this.applicant.phone_no}&guid=0`
             )
