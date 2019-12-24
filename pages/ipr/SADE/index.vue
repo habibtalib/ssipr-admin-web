@@ -200,23 +200,24 @@ export default {
       setuju1: null,
       setuju2: null,
       spouses: [],
-      // applicant: {
-      //   name: null,
-      //   email: null,
-      //   is_using_rep_email: false,
-      //   ic_type: 0,
-      //   ic: null,
-      //   marital_status: null,
-      //   income: 0,
-      //   phone_no: null,
-      //   address_1: null,
-      //   address_2: null,
-      //   address_3: null,
-      //   postcode: null,
-      //   district: null,
-      //   state: null,
-      //   by_admin: true
-      // },
+      applicant: {
+        name: null,
+        email: null,
+        is_using_rep_email: false,
+        ic_type: 0,
+        ic: null,
+        marital_status: null,
+        income: 0,
+        telco: null,
+        phone_no: null,
+        address_1: null,
+        address_2: null,
+        address_3: null,
+        postcode: null,
+        district: null,
+        state: null,
+        by_admin: true
+      },
       residence: {
         individual_meter_acc_no: null,
         bulk_meter_acc_no: null,
@@ -240,19 +241,19 @@ export default {
     ...mapGetters({
       currentUser: 'admin_auth/currentUser',
       application: 'ipr_application/application'
-    }),
-    applicant() {
-      return this.application && this.application.applicant
-        ? this.application.applicant
-        : {}
-    }
+    })
+    // applicant() {
+    //   return this.application && this.application.applicant
+    //     ? this.application.applicant
+    //     : {}
+    // }
   },
   created() {
     this.$store.dispatch('admin_auth/setCurrentUser')
-    this.$store.dispatch(
-      'ipr_application/setApplication',
-      this.$route.params.id
-    )
+    // this.$store.dispatch(
+    //   'ipr_application/setApplication',
+    //   this.$route.params.id
+    // )
     this.$store.dispatch('misc/setPathName', 'ipr/SADE')
   },
   methods: {
@@ -340,14 +341,14 @@ export default {
 
             Toast.open({
               duration: 5000,
-              message: errors,
+              message: errors.join(', '),
               type: 'is-danger'
             })
           } else {
-            console.log(res.data)
+            console.log(res.data, this.applicant)
             const message = `[PRSADE${res.data.id}]PERMOHONAN SKIM AIR DARUL EHSAN-${this.applicant.name} telah diterima dan sedang diproses`
             axios.get(
-              `http://mtsms.15888.my/Receiver.aspx?keyword=SUKSSSIPR&Username=suksssipr&Password=suks$$s1pr19&Type=bulk&contents=${message}&mobileno=${this.applicant.phone_no}&guid=0`
+              `http://mtsms.15888.my/Receiver.aspx?keyword=SUKSSSIPR&Username=suksssipr&Password=suks$$s1pr19&Type=bulk&contents=${message}&mobileno=${this.applicant.telco}${this.applicant.phone_no}&guid=0`
             )
             Toast.open({
               duration: 5000,

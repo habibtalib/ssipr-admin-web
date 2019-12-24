@@ -10,6 +10,7 @@ class Applicant {
     this.income = props.income
     this.residence_period = props.residence_period
     this.religion = props.religion
+    this.telco = props.telco
     this.phone_no = props.phone_no
     this.address_1 = props.address_1
     this.address_2 = props.address_2
