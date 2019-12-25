@@ -29,7 +29,11 @@
               </b-field>
 
               <b-field
-                :label="applicant.email ? $t('f.email') : $t('f.repEmail')"
+                :label="
+                  applicant.is_using_rep_email || applicant.rep_email
+                    ? $t('f.repEmail')
+                    : $t('f.email')
+                "
               >
                 {{ applicant.email ? applicant.email : applicant.rep_email }}
               </b-field>

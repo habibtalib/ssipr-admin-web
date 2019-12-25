@@ -235,7 +235,13 @@ export default {
       genders: 'lookup/genders',
       maritalStatuses: 'lookup/maritalStatuses',
       icTypes: 'lookup/icTypes'
-    })
+    }),
+    checkEmail() {
+      return this.applicant.phone_no ? 'email' : 'required|email'
+    },
+    checkPhone() {
+      return this.applicant.email ? 'email' : 'required|email'
+    }
   }
 }
 </script>

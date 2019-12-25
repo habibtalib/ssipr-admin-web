@@ -212,6 +212,7 @@ export default {
         phone_no: null,
         address_1: null,
         address_2: null,
+        rep_email: null,
         address_3: null,
         postcode: null,
         district: null,
