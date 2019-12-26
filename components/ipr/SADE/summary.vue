@@ -59,7 +59,7 @@
               </b-field>
 
               <b-field :label="$t('f.pNo')">
-                {{ applicant.telco || '' }}{{ applicant.phone_no }}
+                {{ phoneNo }}
               </b-field>
             </div>
           </div>
@@ -294,6 +294,13 @@ export default {
         parseFloat(this.totalSpousesSalaries) +
         parseFloat(this.applicant.income)
       )
+    },
+    phoneNo() {
+      if (this.applicant.telco && this.applicant.phone_no) {
+        return this.applicant.telco + this.applicant.phone_no
+      } else {
+        return null
+      }
     },
     applicationDate() {
       return (
