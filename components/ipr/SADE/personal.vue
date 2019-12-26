@@ -92,7 +92,7 @@
                 >
                   <b-input
                     v-model="applicant.email"
-                    v-validate="'email'"
+                    v-validate="applicant.phone_no ? 'email' : 'required|email'"
                     name="applicantEmail"
                   ></b-input>
                 </b-field>
@@ -182,7 +182,7 @@
             </b-select>
             <b-input
               v-model="applicant.phone_no"
-              v-validate="'numeric'"
+              v-validate="applicant.email ? 'numeric' : 'required|numeric'"
               name="applicantPNo"
               placeholder="23456789"
             ></b-input>
@@ -240,7 +240,7 @@ export default {
       return this.applicant.phone_no ? 'email' : 'required|email'
     },
     checkPhone() {
-      return this.applicant.email ? 'email' : 'required|email'
+      return this.applicant.email ? 'numeric' : 'required|numeric'
     }
   }
 }
