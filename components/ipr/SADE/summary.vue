@@ -299,7 +299,7 @@ export default {
       if (this.applicant.telco && this.applicant.phone_no) {
         return this.applicant.telco + this.applicant.phone_no
       } else {
-        return null
+        return this.applicant.phone_no
       }
     },
     applicationDate() {
