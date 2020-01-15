@@ -8,13 +8,13 @@
         to="/account"
         tag="nuxt-link"
       ></b-menu-item>
-      <b-menu-item
-        :active="currentPath == 'profile'"
+      <!-- <b-menu-item
+        :active="currentPath == 'applicant'"
         icon="human"
         label="Pendaftaran"
-        to="/profile"
+        to="/applicant"
         tag="nuxt-link"
-      ></b-menu-item>
+      ></b-menu-item> -->
       <b-menu-item :active="activeConds(['ipr'])" icon="folder-open">
         <template slot="label" slot-scope="props">
           Permohonan
@@ -24,13 +24,13 @@
           >
           </b-icon>
         </template>
-        <b-menu-item
+        <!-- <b-menu-item
           :active="currentPath == '/ipr/SADE'"
           icon="file-plus"
           label="Skim Air Selangor"
           to="/ipr/SADE"
           tag="nuxt-link"
-        ></b-menu-item>
+        ></b-menu-item> -->
         <!-- <b-menu-item
           :active="currentPath == '/ipr/KISS'"
           icon="file-plus"

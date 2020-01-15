@@ -1,0 +1,110 @@
+<template>
+  <div class="columns">
+    <div class="column">
+      <h1 class="has-text-weight-semibold is-size-4">
+        Profile
+      </h1>
+
+      <br />
+
+      <form @submit.prevent="finalize()">
+        <personal-fields
+          :applicant="applicant"
+          :residence="residence"
+          :reset-value="resetValue"
+        ></personal-fields>
+
+        <spouses-fields
+          v-if="applicant && applicant.marital_status == 'Berkahwin'"
+          :spouses="spouses"
+        ></spouses-fields>
+
+        <residence-fields
+          v-if="applicant"
+          :applicant="applicant"
+        ></residence-fields>
+        <hr />
+
+        <button
+          type="submit"
+          class="button is-primary is-fullwidth is-outlined"
+        >
+          Kemaskini
+        </button>
+      </form>
+    </div>
+  </div>
+</template>
+
+<script>
+import { Toast } from 'buefy/dist/components/toast'
+import { mapGetters } from 'vuex'
+import PersonalFields from '~/components/applicant/personal.vue'
+import SpousesFields from '~/components/account/forms/spouses.vue'
+import ResidenceFields from '~/components/applicant/residence.vue'
+export default {
+  middleware: ['check_admin_auth', 'admin_auth'],
+  components: {
+    PersonalFields,
+    SpousesFields,
+    ResidenceFields
+  },
+  data() {
+    return {
+      isSummaryModalActive: false
+    }
+  },
+  computed: {
+    ...mapGetters({
+      applicant: 'applicant/applicant'
+    })
+  },
+  created() {
+    this.$store.dispatch('applicant/setApplicant', this.$route.params.id)
+  },
+  methods: {
+    finalize() {
+      this.$validator.validateAll().then(result => {
+        if (result) {
+          this.isSummaryModalActive = true
+        } else {
+          Toast.open({
+            duration: 5000,
+            message: 'Maklumat tidak lengkap. Sila semak.',
+            type: 'is-danger'
+          })
+        }
+      })
+    },
+    setIsLoading(status) {
+      this.$store.dispatch('misc/setIsLoading', status)
+    },
+    sumSpousesSalaries(items, prop) {
+      if (items) {
+        const x = items.reduce((a, b) => parseFloat(a) + parseFloat(b[prop]), 0)
+        return x
+      } else {
+        return 0
+      }
+    },
+    fixedTwoDecimal(n) {
+      return n.toFixed(2)
+    }
+  }
+}
+</script>
+
+<style scoped>
+.mt3rem {
+  margin-top: 3rem;
+}
+.card-content.dashb {
+  padding: 1rem;
+}
+h4.dashb {
+  margin-bottom: 0;
+}
+.mtauto {
+  margin-top: auto;
+}
+</style>

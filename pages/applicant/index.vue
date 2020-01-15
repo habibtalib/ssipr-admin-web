@@ -60,19 +60,19 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="application in applicants.list" :key="application.id">
+            <tr v-for="applicant in applicants.list" :key="applicant.ic">
               <td>
-                <a @click="openSummaryModal(application.id)">{{
-                  application.ic
+                <a @click="openSummaryModal(applicant.ic)">{{
+                  applicant.ic
                 }}</a>
               </td>
-              <td>{{ application.name.toUpperCase() }}</td>
-              <td>{{ application.inserted_at | formatDate }}</td>
+              <td>{{ applicant.name.toUpperCase() }}</td>
+              <td>{{ applicant.inserted_at | formatDate }}</td>
               <td>
-                {{ application.verified_account ? 'SAH' : 'TIDAK SAH' }}
+                {{ applicant.verified_account ? 'SAH' : 'TIDAK SAH' }}
               </td>
               <td>
-                <span @click="viewDetail(application)">
+                <span @click="viewDetail(applicant)">
                   <b-icon size="is-small" icon="pencil"></b-icon
                 ></span>
               </td>
@@ -81,8 +81,8 @@
         </table>
 
         <b-pagination
-          v-if="applications.list"
-          :total="applications.pagination.total_entries"
+          v-if="applicants.list && applicants.pagination"
+          :total="applicants.pagination.total_entries"
           :current.sync="currentPage"
           :per-page="applications.pagination.page_size"
           @change="changePage"
@@ -180,9 +180,9 @@ export default {
     this.$store.dispatch('misc/setPathName', 'dashboard')
   },
   methods: {
-    viewDetail(application) {
+    viewDetail(applicant) {
       // this.$router.push('/application/' + application.id)
-      this.$router.push('/ipr/SADE/' + application.id)
+      this.$router.push('/applicant/' + applicant.ic)
     },
     queryParams() {
       const params = new URLSearchParams()
@@ -202,11 +202,11 @@ export default {
       this.currentPage = page
       this.$store.dispatch('ipr_application/setList', this.queryParams())
     },
-    openSummaryModal(id) {
+    openSummaryModal(ic) {
       this.selectedApplication = new Map()
       this.selectedApplication.set(
         'data',
-        this.applications.list.find(a => a.id === id)
+        this.applications.list.find(a => a.ic === ic)
       )
       this.selectedApplication = this.selectedApplication.get('data')
       this.isSummaryModalActive = true

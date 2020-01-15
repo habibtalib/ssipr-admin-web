@@ -10,8 +10,8 @@ export const mutations = {
       pagination: p.pagination
     }
   },
-  setApplication(s, p) {
-    s.applicants = p
+  setApplicant(s, p) {
+    s.applicant = p
   }
 }
 
@@ -37,12 +37,23 @@ export const actions = {
       })
       // eslint-disable-next-line no-console
       .catch(err => console.log(err))
+  },
+  async setApplicant({ commit }, id) {
+    try {
+      const { data } = await this.$axios.get(`/api/v1/admin/applicants/${id}`)
+      console.log('setApplicant', data.data)
+      commit('setApplicant', data.data)
+
+      return { error: false }
+    } catch (err) {
+      return { error: true, errors: err.response.data.errors }
+    }
   }
 }
 
 export const getters = {
   applicant: s => {
-    return s.application
+    return s.applicant
   },
   applicants: s => {
     return s.applicants
