@@ -39,6 +39,7 @@
 <script>
 import { Toast } from 'buefy/dist/components/toast'
 import { mapGetters } from 'vuex'
+import { Dialog } from 'buefy/dist/components/dialog'
 import PersonalFields from '~/components/applicant/personal.vue'
 import SpousesFields from '~/components/account/forms/spouses.vue'
 import ResidenceFields from '~/components/applicant/residence.vue'
@@ -108,7 +109,49 @@ export default {
     finalize() {
       this.$validator.validateAll().then(result => {
         if (result) {
-          this.isSummaryModalActive = true
+          this.setIsLoading(true)
+          this.applicant.dob.setDate(this.applicant.dob.getDate() + 1)
+          let i
+          for (i = 0; i < this.applicant.childrens.length; i++) {
+            this.applicant.childrens[i].dob.setDate(
+              this.applicant.childrens[i].dob.getDate() + 1
+            )
+          }
+          this.$store
+            .dispatch('applicant/update', {
+              applicant: this.applicant
+            })
+            .then(res => {
+              this.setIsLoading(false)
+
+              if (res.error) {
+                const errors = []
+
+                for (const k in res.errors) {
+                  if ({}.hasOwnProperty.call(res.errors, k)) {
+                    errors.push(k + ' ' + res.errors[k].join(', '))
+                  }
+                }
+
+                Dialog.alert({
+                  message: errors.join(', '),
+                  type: 'is-danger',
+                  hasIcon: true,
+                  icon: 'times-circle',
+                  iconPack: 'fa'
+                })
+              } else {
+                Dialog.alert({
+                  message: 'Maklumat profil berjaya dikemaskini.',
+                  type: 'is-success',
+                  hasIcon: true,
+                  icon: 'check-circle',
+                  iconPack: 'fa'
+                })
+                this.isEditing = false
+                window.scrollTo(0, 0)
+              }
+            })
         } else {
           Toast.open({
             duration: 5000,
