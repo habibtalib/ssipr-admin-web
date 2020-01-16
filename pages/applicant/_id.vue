@@ -108,15 +108,17 @@ export default {
     },
     finalize() {
       this.$validator.validateAll().then(result => {
+        console.log('result', result)
         if (result) {
           this.setIsLoading(true)
-          this.applicant.dob.setDate(this.applicant.dob.getDate() + 1)
+          // this.applicant.dob.setDate(this.applicant.dob.getDate() + 1)
           // let i
           // for (i = 0; i < this.applicant.childrens.length; i++) {
           //   this.applicant.childrens[i].dob.setDate(
           //     this.applicant.childrens[i].dob.getDate() + 1
           //   )
           // }
+          console.log('dispatch')
           this.$store
             .dispatch('applicant/update', {
               applicant: this.applicant

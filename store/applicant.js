@@ -39,9 +39,10 @@ export const actions = {
       .catch(err => console.log(err))
   },
   async update({ commit, dispatch }, params) {
+    console.log('update', params)
     try {
       const { data } = await this.$axios.put(
-        `/api/v1/applicants/${params.applicant.ic}`,
+        `/api/v1/admin/applicants/${params.applicant.ic}`,
         params
       )
 
