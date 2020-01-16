@@ -9,8 +9,8 @@
 
       <form @submit.prevent="finalize()">
         <personal-fields
+          v-if="applicant"
           :applicant="applicant"
-          :residence="residence"
           :reset-value="resetValue"
         ></personal-fields>
 
@@ -63,6 +63,48 @@ export default {
     this.$store.dispatch('applicant/setApplicant', this.$route.params.id)
   },
   methods: {
+    resetValue(field) {
+      switch (field) {
+        case 'marital_status':
+          if (this.applicant.marital_status === 'Berkahwin') {
+            this.spouses = [
+              {
+                idx: 1,
+                ic: null,
+                name: null,
+                income: null,
+                tele_no: null,
+                email: null
+              }
+            ]
+            this.childs = []
+          } else {
+            this.spouses = []
+            this.childs = []
+          }
+          break
+        case 'ic_type':
+          this.applicant.ic = null
+          break
+        case 'email_owner':
+          this.applicant.email = null
+          break
+        case 'meter_type':
+          this.residence.individual_meter_acc_no = null
+          this.residence.bulk_meter_acc_no = null
+          this.jmb_confirmation.jmb_name = null
+          this.jmb_confirmation.jmb_email = null
+          this.jmb_confirmation.tele_no = null
+          this.jmb_confirmation.jmb_rep_position = null
+          this.jmb_confirmation.jmb_rep_name = null
+          this.jmb_confirmation.bulk_meter_no = null
+          this.jmb_confirmation.jmb_serial_no = null
+          this.jmb_confirmation.confirmation_date = null
+          break
+        default:
+        // DO NOTHING
+      }
+    },
     finalize() {
       this.$validator.validateAll().then(result => {
         if (result) {

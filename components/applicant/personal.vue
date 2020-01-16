@@ -1,5 +1,5 @@
 <template>
-  <article class="message is-dark">
+  <article v-if="applicant" class="message is-dark">
     <div class="message-header">
       <p>Maklumat Peribadi</p>
     </div>
@@ -125,11 +125,6 @@
             :type="{ 'is-danger': errors.has('applicantPNo') }"
             :message="errors.first('applicantPNo')"
           >
-            <b-select v-model="applicant.telco" placeholder="Select No.">
-              <option v-for="telco in telcos" :value="telco" :key="telco">
-                {{ telco }}
-              </option>
-            </b-select>
             <b-input
               v-model="applicant.phone_no"
               v-validate="applicant.email ? 'numeric' : 'required|numeric'"
@@ -152,10 +147,6 @@ export default {
   },
   props: {
     applicant: {
-      type: Object,
-      required: true
-    },
-    residence: {
       type: Object,
       required: true
     },
