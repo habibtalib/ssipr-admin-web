@@ -8,13 +8,13 @@
         to="/account"
         tag="nuxt-link"
       ></b-menu-item>
-      <!-- <b-menu-item
+      <b-menu-item
         :active="currentPath == 'applicant'"
         icon="human"
         label="Pendaftaran"
         to="/applicant"
         tag="nuxt-link"
-      ></b-menu-item> -->
+      ></b-menu-item>
       <b-menu-item :active="activeConds(['ipr'])" icon="folder-open">
         <template slot="label" slot-scope="props">
           Permohonan
