@@ -38,6 +38,20 @@ export const actions = {
       // eslint-disable-next-line no-console
       .catch(err => console.log(err))
   },
+  async update({ commit, dispatch }, params) {
+    try {
+      const { data } = await this.$axios.put(
+        `/api/v1/applicants/${params.applicant.ic}`,
+        params
+      )
+
+      dispatch('setCurrentUser', data.data)
+
+      return { error: false }
+    } catch (err) {
+      return { error: true, errors: err.response.data.errors }
+    }
+  },
   async setApplicant({ commit }, id) {
     try {
       const { data } = await this.$axios.get(`/api/v1/admin/applicants/${id}`)

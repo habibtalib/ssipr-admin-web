@@ -196,11 +196,11 @@ export default {
       return params
     },
     search(query) {
-      this.$store.dispatch('ipr_application/searchList', this.queryParams())
+      this.$store.dispatch('applicant/searchList', this.queryParams())
     },
     changePage(page) {
       this.currentPage = page
-      this.$store.dispatch('ipr_application/setList', this.queryParams())
+      this.$store.dispatch('applicant/setList', this.queryParams())
     },
     openSummaryModal(ic) {
       this.selectedApplication = new Map()
