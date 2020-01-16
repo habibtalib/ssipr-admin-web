@@ -1,5 +1,5 @@
 <template>
-  <article class="message is-dark">
+  <article v-if="spouses" class="message is-dark">
     <div class="message-header">
       <p>Maklumat Pasangan {{ spouses.length }}</p>
     </div>
