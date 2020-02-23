@@ -14,6 +14,8 @@
           :reset-value="resetValue"
         ></personal-fields>
 
+        <spouses-fields :applicant="applicant"></spouses-fields>
+
         <residence-fields
           :applicant="applicant"
           :residence="residence"
@@ -269,6 +271,7 @@
 import { Toast } from 'buefy/dist/components/toast'
 import PersonalFields from '~/components/ipr/KISS/personal.vue'
 import ResidenceFields from '~/components/ipr/KISS/residence.vue'
+import SpousesFields from '~/components/ipr/KISS/spouses.vue'
 import FormSummary from '~/components/ipr/KISS/summary.vue'
 let idx = 1
 export default {
@@ -276,7 +279,8 @@ export default {
   components: {
     PersonalFields,
     ResidenceFields,
-    FormSummary
+    FormSummary,
+    SpousesFields
   },
   data() {
     return {
@@ -299,7 +303,10 @@ export default {
         postcode: null,
         district: null,
         state: null,
-        by_admin: true
+        by_admin: true,
+        spouse: {
+          name: null
+        }
       },
       residence: {
         individual_meter_acc_no: null,

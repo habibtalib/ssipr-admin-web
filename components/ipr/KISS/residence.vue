@@ -40,7 +40,8 @@
               max="10"
             ></b-input>
           </b-field>
-
+        </div>
+        <div class="column is-half">
           <b-field
             :label="$t('f.postCode')"
             :type="{ 'is-danger': errors.has('applicantPostcode') }"

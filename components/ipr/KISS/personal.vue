@@ -1,15 +1,38 @@
 <template>
   <article class="message is-dark">
     <div class="message-header">
-      <p>Maklumat Peribadi</p>
+      <p>MAKLUMAT PEMOHON</p>
     </div>
     <div class="message-body has-background-white">
       <div class="columns">
         <div class="column is-half">
           <b-field
+            :label="$t('f.name')"
+            :type="{ 'is-danger': errors.has('applicantName') }"
+            :message="errors.first('applicantName')"
+          >
+            <b-input
+              v-model="applicant.name"
+              v-validate="{ required: true, regex: /^[ A-Za-z@'/-]*$/ }"
+              name="applicantName"
+            ></b-input>
+          </b-field>
+
+          <b-field label="Jantina">
+            <div class="block">
+              <b-radio :value="applicant.gender" native-value="lelaki">
+                Lelaki
+              </b-radio>
+              <b-radio :value="applicant.gender" native-value="perempuan">
+                Perempuan
+              </b-radio>
+            </div>
+          </b-field>
+
+          <b-field
             :type="{ 'is-danger': errors.has('applicantId') }"
             :message="errors.first('applicantId')"
-            label="IC/No. Tentera"
+            label="No. Kad Pengenalan / No. Polis / No. Tentera"
             expanded
           >
             <b-input
@@ -20,18 +43,6 @@
                   : 'required|alpha_num'
               "
               name="applicantId"
-            ></b-input>
-          </b-field>
-
-          <b-field
-            :label="$t('f.name')"
-            :type="{ 'is-danger': errors.has('applicantName') }"
-            :message="errors.first('applicantName')"
-          >
-            <b-input
-              v-model="applicant.name"
-              v-validate="{ required: true, regex: /^[ A-Za-z@'/-]*$/ }"
-              name="applicantName"
             ></b-input>
           </b-field>
 
@@ -50,8 +61,35 @@
               </b-field>
             </b-field>
           </b-field>
+
+          <b-field label="Tarikh Lahir">
+            <b-datepicker
+              :value="applicant.dob"
+              icon="calendar-today"
+            ></b-datepicker>
+          </b-field>
+
+          <b-field label="Tempat Lahir">
+            <b-input v-model="applicant.pob"></b-input>
+          </b-field>
         </div>
         <div class="column is-half">
+          <b-field label="Warganegara">
+            <!-- <b-input v-model="currentUser.citizen"></b-input> -->
+            <b-select v-model="applicant.citizen" required>
+              <option value="Ya">Ya</option>
+              <option value="Tidak">Tidak</option>
+            </b-select>
+          </b-field>
+          <b-field label="Bangsa">
+            <!-- <b-input v-model="spouse.race"></b-input> -->
+            <b-select v-model="applicant.race" required>
+              <option value="Melayu">Melayu</option>
+              <option value="Cina">Cina</option>
+              <option value="India">India</option>
+              <option value="Others">Lain-lain</option>
+            </b-select>
+          </b-field>
           <b-field
             :label="$t('f.maritalStatus')"
             :type="{ 'is-danger': errors.has('applicantMaritalStatus') }"
@@ -101,6 +139,9 @@
               name="applicantPNo"
               placeholder="0123456789"
             ></b-input>
+          </b-field>
+          <b-field label="No Telefon Rumah">
+            <b-input :value="applicant.home_no"></b-input>
           </b-field>
         </div>
       </div>
