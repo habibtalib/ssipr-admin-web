@@ -38,7 +38,7 @@
           to="/ipr/KISS"
           tag="nuxt-link"
         ></b-menu-item>
-        <b-menu-item
+        <!-- <b-menu-item
           v-for="p in programmes.list"
           :key="p.id"
           :label="p.ipr_code"
@@ -46,7 +46,7 @@
           icon="file-plus"
           to="/ipr/SADE"
           tag="nuxt-link"
-        ></b-menu-item>
+        ></b-menu-item> -->
       </b-menu-item>
       <b-menu-item
         v-if="isSuperAdmin"
