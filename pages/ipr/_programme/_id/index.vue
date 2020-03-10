@@ -10,18 +10,18 @@
       <form @submit.prevent="finalize()">
         <article class="message is-dark">
           <div class="message-header">
-            <p>Maklumat Pendaftaran</p>
+            <p>Maklumat Permohonan</p>
           </div>
           <div class="message-body has-background-white">
             <div class="columns">
               <div class="column is-4">
                 <b-field label="Status Permohonan">
-                  <b-select v-modal="status" :value="application.status">
+                  <b-select v-model="status">
                     <option
-                      v-for="(status, index) in applicationStatus"
+                      v-for="(s, index) in applicationStatus"
                       :key="index"
-                      :value="status"
-                      >{{ humanizeUpcasingString(status) }}</option
+                      :value="s"
+                      >{{ humanizeUpcasingString(s) }}</option
                     >
                   </b-select>
                 </b-field>
@@ -265,12 +265,14 @@ export default {
       this.$route.params.id
     )
     if (this.application) {
+      console.log('application', this.application)
       this.applicant = this.application.applicant
       this.applicant.ic_type = 0
       this.applicant.is_using_rep_email = false
       this.residence = this.application.residence
       this.jmb_confirmation = this.application.jmb_confirmation
       this.spouses = this.application.applicant.spouses
+      this.status = this.application.status
     }
     this.$store.dispatch('misc/setPathName', 'ipr/SADE')
   },
