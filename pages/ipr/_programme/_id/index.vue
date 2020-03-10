@@ -17,9 +17,12 @@
               <div class="column is-4">
                 <b-field label="Status Permohonan">
                   <b-select :value="application.status">
-                    <option :value="application.status">{{
-                      humanizeUpcasingString(application.status)
-                    }}</option>
+                    <option
+                      v-for="(status, index) in applicationStatus"
+                      :key="index"
+                      :value="status"
+                      >{{ humanizeUpcasingString(status) }}</option
+                    >
                   </b-select>
                 </b-field>
               </div>
@@ -211,6 +214,12 @@ export default {
       setuju1: null,
       setuju2: null,
       spouses: [],
+      applicationStatus: [
+        'diterima_dan_sedang_diproses',
+        'diterima_dan_sedang_menunggu_semakan_jmb_/_mc',
+        'disemak',
+        'gagal'
+      ],
       applicant: {
         name: null,
         email: null,
