@@ -8,6 +8,24 @@
       <br />
 
       <form @submit.prevent="finalize()">
+        <article class="message is-dark">
+          <div class="message-header">
+            <p>Maklumat Pendaftaran</p>
+          </div>
+          <div class="message-body has-background-white">
+            <div class="columns">
+              <div class="column is-4">
+                <b-field label="Status Permohonan">
+                  <b-select :value="application.status">
+                    <option :value="application.status">{{
+                      humanizeUpcasingString(application.status)
+                    }}</option>
+                  </b-select>
+                </b-field>
+              </div>
+            </div>
+          </div>
+        </article>
         <personal-fields
           :applicant="applicant"
           :residence="residence"
@@ -405,6 +423,12 @@ export default {
     },
     fixedTwoDecimal(n) {
       return n.toFixed(2)
+    },
+    humanizeUpcasingString(str) {
+      return str
+        .replace(/_id$/, '')
+        .replace(/_/g, ' ')
+        .toUpperCase()
     },
     print() {
       const prtHtml = document.getElementById('printSummary').innerHTML
