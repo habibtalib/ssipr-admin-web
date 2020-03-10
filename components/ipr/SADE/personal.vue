@@ -126,6 +126,7 @@
                 key="residenceWaterAccNo"
                 v-model="residence.individual_meter_acc_no"
                 v-validate="'required|min:10|max:10'"
+                maxlength="10"
                 name="residenceWaterAccNo"
               ></b-input>
             </b-field>

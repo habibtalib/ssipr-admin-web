@@ -16,7 +16,7 @@
             <div class="columns">
               <div class="column is-4">
                 <b-field label="Status Permohonan">
-                  <b-select :value="application.status">
+                  <b-select v-modal="status" :value="application.status">
                     <option
                       v-for="(status, index) in applicationStatus"
                       :key="index"
@@ -95,7 +95,7 @@
           type="submit"
           class="button is-primary is-fullwidth is-outlined"
         >
-          Hantar
+          Kemaskini
         </button>
 
         <b-modal :active.sync="isSummaryModalActive" scroll="keep">
@@ -167,18 +167,12 @@
               </div>
             </div>
             <footer class="card-footer hide-p">
-              <a
-                @click="isSummaryModalActive = !isSummaryModalActive"
-                class="card-footer-item"
-              >
-                Kemas Kini
-              </a>
               <a @click="print" class="card-footer-item">
                 Cetak
               </a>
               <a
                 v-if="setuju1 && setuju2"
-                @click="create()"
+                @click="update()"
                 class="card-footer-item"
               >
                 Hantar
@@ -194,6 +188,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { Toast } from 'buefy/dist/components/toast'
+import axios from 'axios'
 import PersonalFields from '~/components/ipr/SADE/personal.vue'
 import SpousesFields from '~/components/account/forms/spouses.vue'
 import ResidenceFields from '~/components/ipr/SADE/residence.vue'
@@ -213,6 +208,7 @@ export default {
     return {
       setuju1: null,
       setuju2: null,
+      status: null,
       spouses: [],
       applicationStatus: [
         'diterima_dan_sedang_diproses',
@@ -292,13 +288,14 @@ export default {
         }
       })
     },
-    create() {
+    update() {
       this.setIsLoading(true)
       this.$store
         .dispatch('ipr_application/update', {
           docket: {
             id: this.$route.params.id,
             ipr_code: 'AIR_SELANGOR',
+            status: this.status,
             by_admin: true,
             applicant: {
               name: this.applicant.name,
@@ -372,6 +369,12 @@ export default {
               type: 'is-danger'
             })
           } else {
+            if (this.applicant.telco && this.applicant.phone_no) {
+              const message = `[IPR${res.data.id}]PERMOHONAN SKIM AIR DARUL EHSAN-[${this.applicant.ic}] telah diterima dan sedang diproses`
+              axios.get(
+                `http://mtsms.15888.my/Receiver.aspx?keyword=SUKSSSIPR&Username=suksssipr&Password=suks$$s1pr19&Type=bulk&contents=${message}&mobileno=${this.applicant.telco}${this.applicant.phone_no}&guid=0`
+              )
+            }
             Toast.open({
               duration: 5000,
               message: `Permohonan berjaya dihantar.`,
@@ -417,6 +420,7 @@ export default {
         case 'meter_type':
           this.residence.individual_meter_acc_no = null
           this.residence.bulk_meter_acc_no = null
+          this.jmb_confirmation = {}
           this.jmb_confirmation.jmb_name = null
           this.jmb_confirmation.jmb_email = null
           this.jmb_confirmation.tele_no = null
