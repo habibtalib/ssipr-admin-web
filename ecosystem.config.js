@@ -29,7 +29,7 @@ module.exports = {
     },
     production: {
       user: 'deploy',
-      host: '13.251.234.31',
+      host: '3.1.223.204',
       ref: 'origin/master',
       repo: 'git@github.com:habibtalib/ssipr-admin-web.git',
       path: '/home/deploy/apps/ipr_admin',
