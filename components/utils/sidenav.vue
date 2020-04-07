@@ -24,13 +24,13 @@
           >
           </b-icon>
         </template>
-        <!-- <b-menu-item
+        <b-menu-item
           :active="currentPath == '/ipr/SADE'"
           icon="file-plus"
           label="Skim Air Selangor"
           to="/ipr/SADE"
           tag="nuxt-link"
-        ></b-menu-item> -->
+        ></b-menu-item>
         <!-- <b-menu-item
           :active="currentPath == '/ipr/KISS'"
           icon="file-plus"
